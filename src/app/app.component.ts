@@ -5,7 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
@@ -18,6 +19,7 @@ import { LoginComponent } from './login/login.component';
         MatButtonModule,
         MatMenuModule,
         MatIconModule,
+        MatTooltipModule,
         MatCardModule,
         RouterOutlet,
         RouterLink,
@@ -25,8 +27,9 @@ import { LoginComponent } from './login/login.component';
         LoginComponent,
     ],
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
+    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
     title = 'booksphere';
+    constructor(public router: Router) {}
 }

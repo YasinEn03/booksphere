@@ -6,9 +6,13 @@
 
   <!-- Menüdefinition -->
   <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="'/home'">Home</button>
+    <button mat-menu-item [routerLink]="'/home'" *ngIf="router.url !== '/home'">
+      Home
+    </button>
     <button mat-menu-item [routerLink]="'/login'">Login</button>
-    <button mat-menu-item>Option 3</button>
+    <button mat-menu-item [routerLink]="'/search'">Suche</button>
+    <button mat-menu-item [routerLink]="'/adjust'">Anpassen</button>
+    <button mat-menu-item [routerLink]="'/create'">Hinzufügen</button>
   </mat-menu>
 
   <!-- Titel -->
