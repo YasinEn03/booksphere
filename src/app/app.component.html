@@ -1,10 +1,8 @@
-<mat-toolbar color="primary">
-  <!-- Dropdown-Menü-Button links -->
+<mat-toolbar color="primary" class="toolbar">
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
 
-  <!-- Menüdefinition -->
   <mat-menu #menu="matMenu">
     <button mat-menu-item [routerLink]="'/home'" *ngIf="router.url !== '/home'">
       Home
@@ -15,10 +13,8 @@
     <button mat-menu-item [routerLink]="'/create'">Hinzufügen</button>
   </mat-menu>
 
-  <!-- Titel -->
   <span style="margin-left: 8px">📚 BookSphere</span>
 
-  <!-- Spacer und andere Links -->
   <span class="spacer"></span>
   <a
     mat-button
@@ -34,6 +30,9 @@
     aria-current="page"
     >Login</a
   >
+  <button mat-icon-button>
+    <mat-icon>brightness_6</mat-icon>
+  </button>
 </mat-toolbar>
 
 <div class="home-container">

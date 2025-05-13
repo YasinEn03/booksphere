@@ -7,8 +7,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 
 @Component({
     selector: 'app-root',
@@ -23,8 +21,6 @@ import { LoginComponent } from './login/login.component';
         MatCardModule,
         RouterOutlet,
         RouterLink,
-        HomeComponent,
-        LoginComponent,
     ],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],

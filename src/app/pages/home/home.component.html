@@ -1,0 +1,66 @@
+<section class="welcome-section">
+  <div class="welcome-header">
+    <h1>Willkommen bei <strong class="highlight">BookSphere</strong></h1>
+  </div>
+  <p class="welcome-text">
+    Entdecke eine Welt voller Bücher. Finde, teile und liebe Literatur – alles
+    an einem Ort.
+  </p>
+  <button class="button" mat-raised-button routerLink="/all-books">
+    Jetzt entdecken
+  </button>
+</section>
+
+<!-- Highlights -->
+<div class="features">
+  <mat-card class="feature">
+    <mat-icon class="feature-icon" color="primary">search</mat-icon>
+    <mat-card-title style="margin-top: 15px">Intelligente Suche</mat-card-title>
+    <input style="margin-top: 15px" placeholder="J. K. Rowling" />
+    <p style="margin-top: 25px">
+      Finde Bücher nach Titel, Autor, oder ISBN – in Sekunden.
+    </p>
+  </mat-card>
+  <mat-card class="feature">
+    <mat-icon class="feature-icon" color="primary">category</mat-icon>
+    <mat-card-title style="margin-top: 15px; font-style: bold">
+      Kategorien entdecken</mat-card-title
+    >
+
+    <div class="category-list">
+      <button color="primary">JAVA</button>
+      <button color="primary">JAVASCRIPT</button>
+      <button color="primary">PHYTON</button>
+      <button color="primary">TYPESCRIPT</button>
+    </div>
+  </mat-card>
+</div>
+
+<!-- Zitat/Testimonial -->
+<mat-card class="testimonial-card">
+  <blockquote>
+    <p style="color: black">
+      <em>"Dank BookSphere habe ich meine Leseliebe wiederentdeckt!"</em>
+    </p>
+    <footer style="color: black">– Anna M., Buchliebhaberin</footer>
+  </blockquote>
+</mat-card>
+
+<!-- Footer -->
+<footer
+  style="
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family:
+      'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+      'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  "
+  class="footer"
+>
+  <div class="footer-content">
+    <p>📚 BookSphere – Dein digitales Bücherregal</p>
+    <a href="/impressum">Impressum</a> |
+    <a href="https://www.youtube.com">Youtube</a> |
+    <a href="https://linkedin.com">LinkedIn</a>
+  </div>
+</footer>

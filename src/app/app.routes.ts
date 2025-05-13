@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AdjustComponent } from './adjust/adjust.component';
-import { CreateComponent } from './create/create.component';
-import { SearchComponent } from './search/search.component';
+import { AdjustComponent } from './pages/adjust/adjust.component';
+import { CreateComponent } from './pages/create/create.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { SearchComponent } from './pages/search/search.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
