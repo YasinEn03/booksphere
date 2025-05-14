@@ -15,25 +15,43 @@
   }
 }
 
-/* Stellt sicher, dass der Body mindestens die Höhe des Viewports hat */
+@keyframes highlightZoom {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
+  background-color: #f4f8f9;
+  color: #2e3a3f;
 }
 
-/* Hauptcontainer, der sich ausdehnt, um den Footer nach unten zu drücken */
 .main-container {
   flex: 1;
 }
 
 .welcome-section {
   width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    color: #80cbc4;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #00796b;
+  background-color: #e0f2f1;
 }
 
 .welcome-header {
@@ -42,7 +60,13 @@ body {
   align-items: center;
   gap: 0.5rem;
   font-size: 35px;
-  color:#0097a7
+  color: #00695c;
+  animation: scaleWords 0.8s ease-out forwards;
+}
+
+.highlight {
+  animation: highlightZoom 1.5s ease-out forwards;
+  color: #009688;
 }
 
 .welcome-text {
@@ -53,32 +77,27 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   animation: scaleWords 0.5s ease-out forwards;
   transition: all 0.3s ease;
-  padding: 4px;
+  color: #004d40;
 }
 
 .welcome-text:hover {
   font-size: 20px;
-  color: #333;
-  transform: scale(1.05);
+  color: #2e3a3f;
 }
 
-
 .button {
-  background-color: #00bcd4;
+  background-color: #009688;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
   max-width: 200px;
   align-self: center;
+  margin-bottom: 10px;
 }
 
 .button:hover {
-  background-color: #0097a7;
-}
-
-.highlight {
-  color: #00bcd4;
+  background-color: #00796b;
 }
 
 .features {
@@ -92,14 +111,18 @@ body {
 .feature {
   flex: 1 1 200px;
   max-width: 300px;
-  color: #80cbc4;
+  color: #004d40;
   text-align: center;
   padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 150, 136, 0.1);
 }
 
 .feature-icon {
   font-size: 25px;
   margin-bottom: 0.5rem;
+  color: #009688;
 }
 
 .category-list {
@@ -112,8 +135,17 @@ body {
 }
 
 .category-list button {
-  padding: 2px 8px;
-  font-size: 12px;
+  padding: 4px 10px;
+  font-size: 15px;
+  background-color: #b2dfdb;
+  border: none;
+  border-radius: 4px;
+  color: #004d40;
+  cursor: pointer;
+}
+
+.category-list button:hover {
+  background-color: #80cbc4;
 }
 
 .testimonial-card {
@@ -121,18 +153,24 @@ body {
   max-width: 600px;
   font-style: italic;
   text-align: center;
+  background-color: #ffffff;
+  color: #004d40;
+  padding: 1rem;
+  border-left: 4px solid #009688;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 995;
-  padding: 12px 48px;
-  background: rgb(250, 250, 251);
+.searchButton {
+  background-color: #009688;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  max-width: 200px;
+  align-self: center;
 }
 
-.footer-content {
-  color: black;
+.searchButton:hover {
+  background-color: #00796b;
 }
