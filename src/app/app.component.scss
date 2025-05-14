@@ -1,3 +1,32 @@
+.toolbar {
+  background-color: #b2dfdb;
+  color: #00332f;
+}
+
+.toolbar mat-icon,
+.toolbar button,
+.toolbar a {
+  color: #00332f;
+}
+
+.toolbar a.active-link {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #00695c;
+}
+
+mat-menu {
+  background-color: #ffffff;
+}
+
+mat-menu button {
+  color: #004d40;
+}
+
+mat-menu button:hover {
+  background-color: #b2dfdb;
+}
+
 .spacer {
   flex: 1 1 auto;
 }
@@ -5,5 +34,20 @@
 .active-link {
   font-weight: bold;
   text-decoration: underline;
+  color: #00796b;
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 995;
+  padding: 12px 48px;
+  background-color: #b2dfdb;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.footer-content {
+  color: #004d40;
+}
