@@ -11,9 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
+import { AuthService } from '../../security/auth/auth.service';
 
 @Component({
     selector: 'app-login',
+    standalone: true,
     imports: [
         CommonModule,
         MatCardModule,
@@ -39,8 +42,13 @@ import { MatInputModule } from '@angular/material/input';
 export class LoginComponent {
     loginForm: FormGroup;
     submitted = false;
+    errorMessage = ''; // 👈 Für Fehleranzeige
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private auth: AuthService,
+        private router: Router,
+    ) {
         this.loginForm = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
@@ -51,7 +59,19 @@ export class LoginComponent {
         this.submitted = true;
         if (this.loginForm.valid) {
             const { username, password } = this.loginForm.value;
-            console.log('Login:', username, password);
+
+            this.auth.login(username, password).subscribe({
+                next: () => {
+                    // ✅ Login erfolgreich
+                    this.router.navigate(['/home']);
+                },
+                error: (err) => {
+                    // ❌ Fehler beim Login
+                    this.errorMessage =
+                        '❌ Login fehlgeschlagen. Bitte überprüfe deine Daten.';
+                    console.error('Login-Fehler:', err);
+                },
+            });
         }
     }
 
