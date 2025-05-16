@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-book-list',
-  imports: [],
-  templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.scss'
+    selector: 'app-book-list',
+    templateUrl: '../../../pages/books/all-books.component.html',
+    styleUrls: ['../../../pages/books/all-books.component.scss'],
 })
-export class BookListComponent {
-
-}
+export class BookListComponent {}

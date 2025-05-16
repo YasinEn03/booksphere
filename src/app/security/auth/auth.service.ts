@@ -41,7 +41,7 @@ export class AuthService {
                     const token = response.access_token;
                     localStorage.setItem(this.tokenKey, token);
 
-                    // ➕ Rollen extrahieren
+                    // Rollen extrahieren
                     const payload = this.decodeToken(token);
                     const clientRoles =
                         payload?.resource_access?.['nest-client']?.roles || [];
@@ -110,6 +110,14 @@ export class AuthService {
     // Hat der Benutzer eine bestimmte Rolle?
     hasRole(role: string): boolean {
         return this.getRoles().includes(role);
+    }
+
+    isAdmin(): boolean {
+        return this.hasRole('admin');
+    }
+
+    isUser(): boolean {
+        return this.hasRole('user');
     }
 
     // 🔐 Token payload decodieren (JWT)
