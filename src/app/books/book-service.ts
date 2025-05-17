@@ -2,14 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-export interface Book {
-    id: number;
-    title: string;
-    isbn: string;
-    author: string;
-    // ggf. weitere Felder
-}
+import { Book } from './book.model';
 
 @Injectable({
     providedIn: 'root',

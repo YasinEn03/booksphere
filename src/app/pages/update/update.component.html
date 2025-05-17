@@ -1,9 +1,9 @@
-<div class="book-form-container">
-  <h2>Neues Buch erstellen</h2>
-  <form (ngSubmit)="createBook()" #createForm="ngForm">
+<div class="book-form-container" *ngIf="book">
+  <h2>Buch aktualisieren</h2>
+  <form (ngSubmit)="updateBook()" #updateForm="ngForm">
     <mat-form-field appearance="fill">
       <mat-label>ISBN</mat-label>
-      <input matInput name="isbn" [(ngModel)]="book.isbn" required />
+      <input matInput [value]="book.isbn" disabled />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -26,8 +26,8 @@
       <input matInput name="publishedDate" type="date" [(ngModel)]="book.publishedDate" required />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!createForm.valid">
-      Buch erstellen
+    <button mat-raised-button color="accent" type="submit" [disabled]="!updateForm.valid">
+      Buch speichern
     </button>
   </form>
 </div>
