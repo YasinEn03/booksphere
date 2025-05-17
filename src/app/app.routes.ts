@@ -1,17 +1,21 @@
 import { Routes } from '@angular/router';
-import { AdjustComponent } from './pages/adjust/adjust.component';
-import { CreateComponent } from './pages/create/create.component';
+import { CreateComponent } from './books/book-create/create.component';
+import { BookListComponent } from './books/book-list/book-list.component';
+import { BookSearchComponent } from './books/book-search/book-search.component';
+import { UpdateComponent } from './books/book-update/update.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { SearchComponent } from './pages/search/search.component';
+import { AccessDeniedComponent } from './pages/redirect/access-denied/access-denied/access-denied.component';
+import { PageNotFoundComponent } from './pages/redirect/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'search', component: SearchComponent },
-    { path: 'adjust', component: AdjustComponent },
+    { path: 'search', component: BookSearchComponent },
+    { path: 'books', component: BookListComponent },
+    { path: 'update', component: UpdateComponent },
     { path: 'create', component: CreateComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'access-denied', component: AccessDeniedComponent },
     { path: '**', component: PageNotFoundComponent },
 ];

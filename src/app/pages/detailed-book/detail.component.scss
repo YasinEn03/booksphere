@@ -1,0 +1,19 @@
+.detail-container {
+  padding: 16px;
+  color: #00332f;
+}
+
+mat-card {
+  background-color: #ffffff;
+  color: #004d40;
+  box-shadow: 0 2px 5px rgba(0, 77, 64, 0.1);
+}
+
+.admin-actions {
+  margin-top: 16px;
+
+  button {
+    background-color: #b2dfdb;
+    color: #00332f;
+  }
+}

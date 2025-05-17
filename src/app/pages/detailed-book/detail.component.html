@@ -1,0 +1,15 @@
+<div class="detail-container" *ngIf="book">
+  <mat-card>
+    <mat-card-title>{{ book.title }}</mat-card-title>
+    <mat-card-subtitle>ISBN: {{ book.isbn }}</mat-card-subtitle>
+    <mat-card-content>
+      <p><strong>Erscheinungsdatum:</strong> {{ book.publishedDate }}</p>
+      <p><strong>Preis:</strong> {{ book.price }} €</p>
+      <p><strong>Rabatt:</strong> {{ book.discount }}%</p>
+    </mat-card-content>
+
+    <div *ngIf="this.authService.isAdmin()" class="admin-actions">
+      <button mat-raised-button color="primary" (click)="updateBook(book)">Aktualisieren</button>
+    </div>
+  </mat-card>
+</div>
