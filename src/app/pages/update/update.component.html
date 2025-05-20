@@ -1,6 +1,6 @@
 <div class="book-form-container" *ngIf="book">
   <h2>Buch aktualisieren</h2>
-  <form (ngSubmit)="updateBook()" #updateForm="ngForm">
+  <form #updateForm="ngForm">
     <mat-form-field appearance="fill">
       <mat-label>ISBN</mat-label>
       <input matInput [value]="book.isbn" disabled />

@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthService } from '../../security/auth/auth.service';
 import { BookService } from '../book-service';
 import { Book } from '../book.model';
 
@@ -22,7 +21,7 @@ import { Book } from '../book.model';
     templateUrl: '../../pages/create/create.component.html',
     styleUrl: '../../pages/create/create.component.scss',
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent {
     book: Book = {
         id: undefined,
         isbn: '',
@@ -33,15 +32,9 @@ export class CreateComponent implements OnInit {
     };
 
     constructor(
-        private authService: AuthService,
         private router: Router,
         private bookService: BookService,
     ) {}
-    ngOnInit(): void {
-        if (!this.authService.isAdmin()) {
-            this.router.navigate(['/access-denied']);
-        }
-    }
 
     createBook(): void {
         if (!this.book.isbn || !this.book.title || !this.book.publishedDate) {
