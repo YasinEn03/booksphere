@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { AuthService } from '../../security/auth/auth.service';
 import { BookService } from '../book-service';
 import { Book } from '../book.model';
 @Component({
@@ -14,10 +13,7 @@ import { Book } from '../book.model';
 export class BookListComponent implements OnInit {
     books: Book[] = [];
 
-    constructor(
-        private bookService: BookService,
-        private authService: AuthService,
-    ) {}
+    constructor(private bookService: BookService) {}
 
     ngOnInit(): void {
         this.loadBooks();
@@ -26,14 +22,6 @@ export class BookListComponent implements OnInit {
     loadBooks(): void {
         this.bookService.getAllBooks().subscribe((books) => {
             this.books = books;
-        });
-    }
-
-    deleteBook(id: number): void {
-        if (!this.authService.isAdmin()) return;
-
-        this.bookService.deleteBook(id).subscribe(() => {
-            this.books = this.books.filter((b) => b.id !== id);
         });
     }
 }

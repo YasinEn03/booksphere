@@ -1,15 +1,13 @@
 <div class="login-wrapper">
   <mat-card>
     <mat-card-title style="font-size: 25px">Login</mat-card-title>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Benutzername</mat-label>
         <input matInput formControlName="username" required />
-        <mat-error
-          *ngIf="
+        <mat-error *ngIf="
             (submitted || username?.touched) && username?.errors?.['required']
-          "
-        >
+          ">
           Es muss ein Benutzername eingegeben werden
         </mat-error>
       </mat-form-field>
@@ -17,11 +15,9 @@
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Passwort</mat-label>
         <input matInput type="password" formControlName="password" required />
-        <mat-error
-          *ngIf="
+        <mat-error *ngIf="
             (submitted || password?.touched) && password?.errors?.['required']
-          "
-        >
+          ">
           Es muss ein Passwort eingegeben werden
         </mat-error>
       </mat-form-field>

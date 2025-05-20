@@ -8,10 +8,10 @@
     </button>
     <button mat-menu-item [routerLink]="'/search'">Suche</button>
     <button mat-menu-item [routerLink]="'/books'">Bücher</button>
-    <button mat-menu-item [routerLink]="'/adjust'" *ngIf="auth.hasRole('admin')">
+    <button mat-menu-item [routerLink]="'/adjust'">
       Anpassen
     </button>
-    <button mat-menu-item [routerLink]="'/create'" *ngIf="auth.hasRole('admin')">
+    <button mat-menu-item [routerLink]="'/create'">
       Hinzufügen
     </button>
   </mat-menu>
@@ -24,7 +24,7 @@
   </ng-template>
   <ng-container *ngIf="isLoggedIn; else loginLink">
     <span>{{ username }}</span>
-    <button mat-button (click)="logout()">Logout</button>
+    <button mat-button>Logout</button>
   </ng-container>
 </mat-toolbar>
 
