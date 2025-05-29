@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,14 +12,3 @@ import { Router, RouterModule } from '@angular/router';
 export class PageNotFoundComponent {
     constructor(private router: Router) {}
 }
-=======
-import { Component } from '@angular/core';
-
-@Component({
-    selector: 'app-page-not-found',
-    imports: [],
-    templateUrl: './page-not-found.component.html',
-    styleUrl: './page-not-found.component.scss',
-})
-export class PageNotFoundComponent {}
->>>>>>> main

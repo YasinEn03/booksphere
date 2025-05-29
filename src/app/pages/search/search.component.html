@@ -1,5 +1,4 @@
 <div class="search-container">
-<<<<<<< HEAD
   <h2>Buchsuche</h2>
 
   <form class="search-form" (submit)="false">
@@ -53,22 +52,6 @@
         <p>ISBN: {{ b.isbn }}</p>
         <p>Schlagwörter: {{ b.schlagwoerter.join(', ') }}</p>
         <button mat-stroked-button [routerLink]="['/detail', b.id]">Details</button>
-=======
-  <mat-form-field appearance="fill" class="search-field">
-    <mat-label>Buchtitel oder ISBN suchen</mat-label>
-    <input matInput [(ngModel)]="searchQuery" (keyup.enter)="search()" />
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="search()">Suchen</button>
-
-  <div class="results" *ngIf="searchResults.length > 0">
-    <mat-card *ngFor="let book of searchResults" class="book-card">
-      <mat-card-title>{{ book.title }}</mat-card-title>
-      <mat-card-subtitle>ISBN: {{ book.isbn }}</mat-card-subtitle>
-      <mat-card-content>
-        Erscheinungsdatum: {{ book.publishedDate }}<br />
-        Preis: {{ book.price }} €<br />
-        Rabatt: {{ book.discount }}%
->>>>>>> main
       </mat-card-content>
     </mat-card>
   </div>
