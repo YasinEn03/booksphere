@@ -1,12 +1,14 @@
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, Injectable, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import {
     RouterStateSnapshot,
     TitleStrategy,
     provideRouter,
 } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './security/auth/auth.interceptor';
 
 @Injectable({ providedIn: 'root' })
 export class TemplatePageTitleStrategy extends TitleStrategy {
@@ -21,19 +23,8 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
-        provideHttpClient(
-            withInterceptors([
-                (req, next) => {
-                    const token = localStorage.getItem('auth_token');
-                    const authReq = token
-                        ? req.clone({
-                              setHeaders: { Authorization: `Bearer ${token}` },
-                          })
-                        : req;
-                    return next(authReq);
-                },
-            ]),
-        ),
+        provideAnimations(),
+        provideHttpClient(withInterceptors([authInterceptor])),
         { provide: TitleStrategy, useClass: TemplatePageTitleStrategy },
     ],
 };

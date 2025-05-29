@@ -1,1 +1,73 @@
-<p>adjust works!</p>
+<div class="adjust-container">
+  <h2>Buch aktualisieren</h2>
+
+  <div class="book-id-buttons">
+    <p>Buch auswählen:</p>
+    <div class="button-group">
+      <button mat-stroked-button color="primary" *ngFor="let id of buchIds" (click)="buchLaden(id)">
+        {{ id }}
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="book-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>ISBN</mat-label>
+      <input matInput id="isbn" formControlName="isbn" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Version</mat-label>
+      <input matInput id="version" formControlName="version" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Rating (0–5)</mat-label>
+      <input matInput type="number" id="rating" formControlName="rating" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Art</mat-label>
+      <mat-select id="art" formControlName="art">
+        <mat-option value="EPUB">EPUB</mat-option>
+        <mat-option value="HARDCOVER">HARDCOVER</mat-option>
+        <mat-option value="PAPERBACK">PAPERBACK</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Preis</mat-label>
+      <input matInput type="number" step="0.01" id="preis" formControlName="preis" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Rabatt (0–1)</mat-label>
+      <input matInput type="number" step="0.01" id="rabatt" formControlName="rabatt" />
+    </mat-form-field>
+
+    <mat-checkbox formControlName="lieferbar" class="full-width">Lieferbar</mat-checkbox>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Erscheinungsdatum</mat-label>
+      <input matInput [matDatepicker]="picker" id="datum" formControlName="datum" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Homepage</mat-label>
+      <input matInput id="homepage" formControlName="homepage" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Schlagwörter (Kommagetrennt)</mat-label>
+      <input matInput id="schlagwoerter" formControlName="schlagwoerter" />
+    </mat-form-field>
+
+    <div *ngIf="errorMessage" class="error mat-body-2 text-error">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="success mat-body-2 text-success">{{ successMessage }}</div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Speichern</button>
+  </form>
+  <div style="height: 100px;"></div>
+</div>

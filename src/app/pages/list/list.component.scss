@@ -1,0 +1,132 @@
+.list-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem 2rem 180px 2rem;
+
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #004d40;
+  }
+
+  .filter-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family:
+        'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      background-color: #e0f2f1;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      input {
+        accent-color: #004d40;
+      }
+
+      &:hover {
+        background-color: #b2dfdb;
+      }
+    }
+
+    button {
+      padding: 0 1rem;
+      font-weight: 600;
+      background-color: #216770;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #125ea3;
+      }
+    }
+  }
+
+  .book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
+    margin: 0;
+    gap: 1rem;
+  }
+
+  .book-card {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      color: #00695c;
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 0.25rem 0;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    .rating-stars {
+      font-size: 1.2rem;
+      color: #ccc;
+
+      .filled {
+        color: #fbc02d;
+      }
+    }
+  }
+  .pagination {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+
+    button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      border-radius: 4px;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .list-container {
+    margin: 4rem 1rem;
+    padding-bottom: 140px;
+    .book-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .book-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

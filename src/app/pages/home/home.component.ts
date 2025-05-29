@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { BookService } from '../../rest/book-service';
+import { FilterService } from '../service/filter-service';
 
 @Component({
     selector: 'app-home',
@@ -12,6 +18,10 @@ import { RouterLink } from '@angular/router';
         MatCardModule,
         MatToolbarModule,
         MatIconModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatChipsModule,
         CommonModule,
     ],
     templateUrl: './home.component.html',
@@ -19,12 +29,47 @@ import { RouterLink } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
     bookCount = 0;
-    ngOnInit() {
-        // TODO: Ersetze das später durch deinen echten HTTP-Call
-        // z.B. this.bookService.getBookCount().subscribe(count => this.bookCount = count);
+    searchInput = '';
 
-        setTimeout(() => {
-            this.bookCount = 6;
-        }, 500);
+    constructor(
+        private bookService: BookService,
+        private filterService: FilterService,
+        private router: Router,
+    ) {}
+    ngOnInit() {
+        this.bookService
+            .getBookCount()
+            .subscribe((count) => (this.bookCount = count));
+        this.bookService.getRandomIsbn().subscribe((isbn) => {
+            if (isbn) {
+                this.searchInput = isbn;
+            }
+        });
+    }
+
+    onKeywordClick(keyword: string) {
+        this.filterService.setKeywords([keyword.toUpperCase()]);
+        this.router.navigate(['/list']);
+    }
+
+    onSearchClick() {
+        const input = this.searchInput.trim();
+        if (!input) {
+            alert('Bitte etwas eingeben!');
+            return;
+        }
+
+        const isbnRegex = /^[\d-]{13,}$/;
+        const idRegex = /^\d+$/;
+
+        if (idRegex.test(input)) {
+            this.router.navigate(['/search'], { queryParams: { id: input } });
+        } else if (isbnRegex.test(input)) {
+            this.router.navigate(['/search'], { queryParams: { isbn: input } });
+        } else {
+            this.router.navigate(['/search'], {
+                queryParams: { schlagwort: input },
+            });
+        }
     }
 }

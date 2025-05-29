@@ -27,7 +27,7 @@ mat-menu button:hover {
   background-color: #b2dfdb;
 }
 
-ng-container .span{
+ng-container .span {
   font-size: small;
 }
 
@@ -42,12 +42,13 @@ ng-container .span{
 }
 
 .footer {
-  position: fixed;
+  position: sticky;
+  margin-top: auto;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 995;
-  padding: 12px 48px;
+  padding: 12px 42px;
   background-color: #b2dfdb;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
 }

@@ -1,0 +1,57 @@
+<ng-container *ngIf="!isLoading && book; else loadingOrError">
+  <mat-card class="detail-container">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>{{ book.titel.titel }}</h1>
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="book.titel.untertitel">
+        <h2>{{ book.titel.untertitel }}</h2>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="card-content-spacing">
+      <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+      <p><strong>Art:</strong> {{ book.art }}</p>
+      <p><strong>Rating:</strong> {{ book.rating ?? 'Keine Bewertung' }}</p>
+      <p><strong>Preis:</strong> {{ book.preis | currency:'EUR' }}</p>
+      <p><strong>Rabatt:</strong> {{ book.rabatt ? (book.rabatt * 100) + '%' : 'Kein Rabatt' }}</p>
+      <p><strong>Lieferbar:</strong> {{ book.lieferbar ? 'Ja' : 'Nein' }}</p>
+      <p><strong>Datum:</strong> {{ book.datum | date:'longDate' }}</p>
+
+      <p><strong>Homepage:</strong>
+        <a *ngIf="book.homepage" [href]="book.homepage" target="_blank">{{ book.homepage }}</a>
+      </p>
+
+      <div *ngIf="book.schlagwoerter?.length">
+        <strong>Schlagwörter:</strong>
+        <mat-chip-listbox aria-label="Schlagwörter">
+          <mat-chip (click)="onKeywordClick(tag)" *ngFor="let tag of book.schlagwoerter" color="primary" selected>
+            {{ tag }}
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>
+
+      <div class="image-container" *ngIf="book.abbildungen?.length">
+        <h3>Abbildungen</h3>
+        <div class="image" *ngFor="let abbildung of book.abbildungen">
+          <img [src]="'data:' + abbildung.contentType + ';base64,' + abbildung.content" *ngIf="abbildung.contentType"
+            alt="Abbildung" />
+          <p *ngIf="abbildung.beschriftung">{{ abbildung.beschriftung }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-footer class="meta">
+      <small>Erzeugt: {{ book.erzeugt | date:'short' }}</small><br />
+      <small>Aktualisiert: {{ book.aktualisiert | date:'short' }}</small>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>
+
+<ng-template #loadingOrError>
+  <div *ngIf="isLoading" class="detail-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Lade Buchdetails...</p>
+  </div>
+  <p *ngIf="error" class="error">{{ error }}</p>
+</ng-template>

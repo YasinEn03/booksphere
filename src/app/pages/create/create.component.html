@@ -1,1 +1,69 @@
-<p>create works!</p>
+<div class="create-container">
+  <h2 class="h2">Neues Buch erstellen</h2>
+
+  <form (ngSubmit)="createBook()" #bookForm="ngForm" class="form">
+    <mat-form-field appearance="outline">
+      <mat-label>ISBN</mat-label>
+      <input matInput [(ngModel)]="book.isbn" name="isbn" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Titel</mat-label>
+      <input matInput [(ngModel)]="book.titel.titel" name="titel_titel" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Untertitel</mat-label>
+      <input matInput [(ngModel)]="book.titel.untertitel" name="titel_untertitel" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Preis</mat-label>
+      <input matInput type="number" [(ngModel)]="book.preis" name="preis" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Rating</mat-label>
+      <input matInput type="number" [(ngModel)]="book.rating" name="rating" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Rabatt</mat-label>
+      <input matInput type="number" step="0.01" [(ngModel)]="book.rabatt" name="rabatt" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Homepage</mat-label>
+      <input matInput [(ngModel)]="book.homepage" name="homepage" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Datum</mat-label>
+      <input matInput [(ngModel)]="book.datum" name="datum" [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox [(ngModel)]="book.lieferbar" name="lieferbar">Lieferbar</mat-checkbox>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Art</mat-label>
+      <mat-select [(ngModel)]="book.art" name="art">
+        <mat-option value="EPUB">EPUB</mat-option>
+        <mat-option value="HARDCOVER">HARDCOVER</mat-option>
+        <mat-option value="PAPERBACK">PAPERBACK</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Schlagwörter (kommagetrennt)</mat-label>
+      <input matInput [(ngModel)]="book.schlagwoerter" name="schlagwoerter"
+        (change)="book.schlagwoerter = book.schlagwoerter.toString().split(',')" />
+    </mat-form-field>
+
+    <button mat-raised-button class="button" type="submit">Buch erstellen</button>
+  </form>
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>
