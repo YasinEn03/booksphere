@@ -1,0 +1,54 @@
+<div class="list-container">
+  <h2>Bücherliste</h2>
+
+  <div class="filter-section">
+    <label>
+      <input type="checkbox" [(ngModel)]="filterLanguages.JAVA" (change)="applyFilter()" />
+      JAVA
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="filterLanguages.JAVASCRIPT" (change)="applyFilter()" />
+      JAVASCRIPT
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="filterLanguages.TYPESCRIPT" (change)="applyFilter()" />
+      TYPESCRIPT
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="filterLanguages.PYTHON" (change)="applyFilter()" />
+      PYTHON
+    </label>
+    <button (click)="resetFilter()">
+      Keine
+    </button>
+  </div>
+
+  <div class="book-list">
+    <mat-card class="book-card" *ngFor="let book of paginatedBooks" (click)="goToDetails(book.id)" tabindex="0"
+      role="button" [attr.aria-label]="'Details zu ' + book.titel.titel">
+      <mat-card-header>
+        <mat-card-title class="book-title">{{ book.titel.titel }}</mat-card-title>
+        <mat-card-subtitle *ngIf="book.titel.untertitel" class="book-subtitle">
+          {{ book.titel.untertitel }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <p><strong>Preis:</strong> {{ book.preis | currency:'EUR' }}</p>
+        <p><strong>Lieferbar:</strong> {{ book.lieferbar ? 'Ja' : 'Nein' }}</p>
+        <p class="rating-stars">
+          <ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
+            <span [ngClass]="{ 'filled': i < book.rating }">&#9733;</span>
+          </ng-container>
+        </p>
+      </mat-card-content>
+    </mat-card>
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="setPage(i + 1)"
+        [disabled]="currentPage === i + 1">
+        {{ i + 1 }}
+      </button>
+    </div>
+  </div>
+</div>
