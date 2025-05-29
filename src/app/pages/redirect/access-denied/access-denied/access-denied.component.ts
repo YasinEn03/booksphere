@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,4 +14,15 @@ export class AccessDeniedComponent {
     goHome(): void {
         this.router.navigate(['/']);
     }
+=======
+
+@Component({
+  selector: 'app-access-denied',
+  imports: [],
+  templateUrl: './access-denied.component.html',
+  styleUrl: './access-denied.component.scss'
+})
+export class AccessDeniedComponent {
+
+>>>>>>> main
 }

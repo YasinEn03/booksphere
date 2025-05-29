@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .create-container {
   max-width: 600px;
   margin: 3rem auto;
@@ -44,3 +45,35 @@
   color: red;
   margin-top: 1rem;
 }
+=======
+.book-form-container {
+  background-color: #ffffff;
+  padding: 32px;
+  margin: 40px auto;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    color: #004d40;
+    margin-bottom: 24px;
+  }
+
+  mat-form-field {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  button {
+    background-color: #00796b;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  button:disabled {
+    background-color: #b2dfdb;
+    color: #888;
+  }
+}
+>>>>>>> main
