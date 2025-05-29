@@ -49,7 +49,7 @@ export class AdjustComponent implements OnInit {
     ngOnInit(): void {
         this.form = this.fb.group({
             isbn: [''],
-            version: [],
+            version: 0,
             rating: [0],
             art: ['EPUB'],
             preis: [0],
@@ -77,7 +77,6 @@ export class AdjustComponent implements OnInit {
     buchLaden(id: number): void {
         this.bookService.getBookById(id).subscribe({
             next: (book) => {
-                console.log('RAW Buch vom Server:', book);
                 this.bookId = id;
                 this.book = book;
                 this.initForm(book);

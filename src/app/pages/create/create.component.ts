@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -32,6 +32,7 @@ export class CreateComponent {
 
     book: Book = {
         isbn: '',
+        version: 0,
         titel: {
             titel: '',
             untertitel: '',
@@ -49,18 +50,18 @@ export class CreateComponent {
     successMessage = '';
     errorMessage = '';
 
-    createBook() {
+    createBook(bookForm: NgForm) {
+        const book: Book = bookForm.value;
         this.successMessage = '';
         this.errorMessage = '';
 
-        this.bookService.createBook(this.book).subscribe({
-            next: () => {
-                this.successMessage = 'Buch erfolgreich erstellt!';
-                this.resetForm();
+        this.bookService.createBook(book).subscribe({
+            next: (createdBook) => {
+                this.errorMessage = '';
+                console.log('Buch erfolgreich erstellt', createdBook);
             },
             error: (err) => {
-                this.errorMessage = 'Fehler beim Erstellen des Buchs.';
-                console.error(err);
+                this.errorMessage = err.message || 'Unbekannter Fehler';
             },
         });
     }
@@ -68,6 +69,7 @@ export class CreateComponent {
     resetForm() {
         this.book = {
             isbn: '',
+            version: 0,
             rating: 1,
             art: 'PAPERBACK',
             preis: 10,

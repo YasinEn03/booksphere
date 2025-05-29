@@ -53,7 +53,7 @@ export class AuthService {
         localStorage.removeItem(this.usernameKey);
         localStorage.removeItem('roles');
         this.loggedInSubject.next(false);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
     }
 
     checkLoginStatus() {

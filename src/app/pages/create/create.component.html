@@ -1,7 +1,7 @@
 <div class="create-container">
   <h2 class="h2">Neues Buch erstellen</h2>
 
-  <form (ngSubmit)="createBook()" #bookForm="ngForm" class="form">
+  <form (ngSubmit)="createBook(bookForm)" #bookForm="ngForm" class="form">
     <mat-form-field appearance="outline">
       <mat-label>ISBN</mat-label>
       <input matInput [(ngModel)]="book.isbn" name="isbn" required />
@@ -65,5 +65,4 @@
   </form>
 
   <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
-  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 </div>

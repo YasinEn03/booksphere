@@ -22,7 +22,7 @@
   </ng-template>
   <ng-container *ngIf="isLoggedIn; else loginLink">
     <span>{{ username }}</span>
-    <button mat-button>Logout</button>
+    <button mat-button (click)="logout()">Logout</button>
   </ng-container>
 </mat-toolbar>
 

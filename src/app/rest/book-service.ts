@@ -15,7 +15,7 @@ export interface Abbildung {
 
 export interface Book {
     id?: number;
-    version?: number;
+    version: number;
     isbn: string;
     rating: number;
     art?: 'EPUB' | 'HARDCOVER' | 'PAPERBACK';
@@ -38,6 +38,7 @@ export class BookService {
     private baseUrl = 'https://localhost:3000/rest';
     constructor(private http: HttpClient) {}
 
+    book: Book[] = [];
     getAllBooks(): Observable<Book[]> {
         return this.http
             .get<{ content: Book[] }>(`${this.baseUrl}?size=15`)
@@ -49,7 +50,28 @@ export class BookService {
     }
 
     createBook(book: Book): Observable<Book> {
-        return this.http.post<Book>(this.baseUrl, book);
+        return new Observable<Book>((observer) => {
+            this.getBookByIsbn(book.isbn).subscribe({
+                next: (existingBook) => {
+                    if (existingBook) {
+                        observer.error(
+                            new Error(
+                                'Die eingegebene ISBN existiert bereits.',
+                            ),
+                        );
+                    } else {
+                        this.http.post<Book>(this.baseUrl, book).subscribe({
+                            next: (createdBook) => observer.next(createdBook),
+                            error: (err) => observer.error(err),
+                            complete: () => observer.complete(),
+                        });
+                    }
+                },
+                error: (err) => {
+                    observer.error(err);
+                },
+            });
+        });
     }
 
     updateBook(id: number, book: Book): Observable<Book> {
