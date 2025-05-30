@@ -1,29 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
 import { BookService } from '../../rest/book-service';
+import { MaterialModule } from '../index';
 import { FilterService } from '../service/filter-service';
 
 @Component({
     selector: 'app-home',
-    imports: [
-        RouterLink,
-        MatCardModule,
-        MatToolbarModule,
-        MatIconModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatChipsModule,
-        CommonModule,
-    ],
+    imports: [RouterLink, FormsModule, MaterialModule, CommonModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
 })
@@ -40,6 +25,7 @@ export class HomeComponent implements OnInit {
         this.bookService
             .getBookCount()
             .subscribe((count) => (this.bookCount = count));
+
         this.bookService.getRandomIsbn().subscribe((isbn) => {
             if (isbn) {
                 this.searchInput = isbn;

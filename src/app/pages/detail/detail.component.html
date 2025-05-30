@@ -12,7 +12,7 @@
     <mat-card-content class="card-content-spacing">
       <p><strong>ISBN:</strong> {{ book.isbn }}</p>
       <p><strong>Art:</strong> {{ book.art }}</p>
-      <p><strong>Rating:</strong> {{ book.rating ?? 'Keine Bewertung' }}</p>
+      <p><strong>Rating:</strong> {{ book.rating }}</p>
       <p><strong>Preis:</strong> {{ book.preis | currency:'EUR' }}</p>
       <p><strong>Rabatt:</strong> {{ book.rabatt ? (book.rabatt * 100) + '%' : 'Kein Rabatt' }}</p>
       <p><strong>Lieferbar:</strong> {{ book.lieferbar ? 'Ja' : 'Nein' }}</p>
@@ -31,20 +31,25 @@
         </mat-chip-listbox>
       </div>
 
-      <div class="image-container" *ngIf="book.abbildungen?.length">
+      <!-- Optional, falls Bilder erwünscht sind: -->
+      <!-- <div class="image-container" *ngIf="book.abbildungen?.length">
         <h3>Abbildungen</h3>
         <div class="image" *ngFor="let abbildung of book.abbildungen">
           <img [src]="'data:' + abbildung.contentType + ';base64,' + abbildung.content" *ngIf="abbildung.contentType"
             alt="Abbildung" />
           <p *ngIf="abbildung.beschriftung">{{ abbildung.beschriftung }}</p>
         </div>
-      </div>
+      </div> -->
     </mat-card-content>
 
     <mat-card-footer class="meta">
       <small>Erzeugt: {{ book.erzeugt | date:'short' }}</small><br />
       <small>Aktualisiert: {{ book.aktualisiert | date:'short' }}</small>
     </mat-card-footer>
+    <div *ngIf="isAdmin" class="admin-actions">
+      <button (click)="onDeleteClick()"> Löschen</button>
+      <button (click)="onUpdateClick()"> Bearbeiten</button>
+    </div>
   </mat-card>
 </ng-container>
 

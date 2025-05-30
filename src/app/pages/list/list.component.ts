@@ -22,7 +22,6 @@ export class ListComponent implements OnInit {
     pageSize = 6;
     currentPage = 1;
     totalPages = 0;
-
     filterLanguages = {
         JAVA: false,
         JAVASCRIPT: false,

@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { Book, BookService } from '../../rest/book-service';
+import { BookTransferService } from '../service/book.transfer-service';
 
 @Component({
     selector: 'app-adjust',
@@ -44,6 +45,7 @@ export class AdjustComponent implements OnInit {
         private fb: FormBuilder,
         private router: Router,
         private bookService: BookService,
+        private bookTransferService: BookTransferService,
     ) {}
 
     ngOnInit(): void {
@@ -71,6 +73,24 @@ export class AdjustComponent implements OnInit {
             error: (err) => {
                 console.error('Fehler beim Laden der Buch-IDs:', err);
             },
+        });
+
+        this.bookTransferService.getBook().subscribe((book) => {
+            if (book) {
+                this.book = book;
+                this.bookId = book.id!;
+                this.initForm(book);
+                this.errorMessage = null;
+                this.successMessage = `Buch mit der ID ${this.bookId} wurde erfolgreich geladen.`;
+            } else {
+                const idFromRoute =
+                    this.router.getCurrentNavigation()?.extras.state?.[
+                        'bookId'
+                    ];
+                if (idFromRoute) {
+                    this.loadBookById(idFromRoute);
+                }
+            }
         });
     }
 
@@ -127,7 +147,7 @@ export class AdjustComponent implements OnInit {
 
         this.bookService.updateBook(this.bookId, updatedBook).subscribe({
             next: () => {
-                this.successMessage = `✅ Buch ${this.bookId} wurde erfolgreich aktualisiert.`;
+                this.successMessage = `Buch ${this.bookId} wurde erfolgreich aktualisiert.`;
                 this.errorMessage = null;
 
                 setTimeout(() => {
@@ -138,6 +158,21 @@ export class AdjustComponent implements OnInit {
                 this.errorMessage = 'Fehler beim Aktualisieren des Buchs.';
                 this.successMessage = null;
                 console.error(err);
+            },
+        });
+    }
+
+    loadBookById(id: number) {
+        this.bookService.getBookById(id).subscribe({
+            next: (book) => {
+                this.book = book;
+                this.bookId = id;
+                this.initForm(book);
+                this.errorMessage = null;
+            },
+            error: () => {
+                this.errorMessage = 'Buch konnte nicht geladen werden.';
+                setTimeout(() => this.router.navigate(['/list']), 2000);
             },
         });
     }
