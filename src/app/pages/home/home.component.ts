@@ -1,14 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
 import { BookService } from '../../rest/book-service';
-import { MaterialModule } from '../index';
 import { FilterService } from '../service/filter-service';
+import { SearchTransferService } from '../service/search.transfer-serivce';
 
 @Component({
     selector: 'app-home',
-    imports: [RouterLink, FormsModule, MaterialModule, CommonModule],
+    imports: [
+        RouterLink,
+        MatCardModule,
+        MatToolbarModule,
+        MatDividerModule,
+        MatIconModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatChipsModule,
+        CommonModule,
+    ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
 })
@@ -20,12 +38,12 @@ export class HomeComponent implements OnInit {
         private bookService: BookService,
         private filterService: FilterService,
         private router: Router,
+        private searchTransferService: SearchTransferService,
     ) {}
     ngOnInit() {
         this.bookService
             .getBookCount()
             .subscribe((count) => (this.bookCount = count));
-
         this.bookService.getRandomIsbn().subscribe((isbn) => {
             if (isbn) {
                 this.searchInput = isbn;
@@ -44,18 +62,7 @@ export class HomeComponent implements OnInit {
             alert('Bitte etwas eingeben!');
             return;
         }
-
-        const isbnRegex = /^[\d-]{13,}$/;
-        const idRegex = /^\d+$/;
-
-        if (idRegex.test(input)) {
-            this.router.navigate(['/search'], { queryParams: { id: input } });
-        } else if (isbnRegex.test(input)) {
-            this.router.navigate(['/search'], { queryParams: { isbn: input } });
-        } else {
-            this.router.navigate(['/search'], {
-                queryParams: { schlagwort: input },
-            });
-        }
+        this.searchTransferService.setSearchInput(input);
+        this.router.navigate(['/search']);
     }
 }

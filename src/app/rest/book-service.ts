@@ -96,14 +96,17 @@ export class BookService {
     }
 
     getBookByIsbn(isbn: string): Observable<Book | undefined> {
-        return this.http.get<Book>(`${this.baseUrl}/?isbn=${isbn}`).pipe(
-            catchError((err) => {
-                if (err.status === 404) {
-                    return of(undefined);
-                }
-                return throwError(() => err);
-            }),
-        );
+        return this.http
+            .get<{ content: Book[] }>(`${this.baseUrl}/?isbn=${isbn}`)
+            .pipe(
+                map((response) => response.content[0]), // nimm das erste Buch
+                catchError((err) => {
+                    if (err.status === 404) {
+                        return of(undefined);
+                    }
+                    return throwError(() => err);
+                }),
+            );
     }
 
     getBooksBySchlagwoerter(schlagwort: string): Observable<Book[]> {
