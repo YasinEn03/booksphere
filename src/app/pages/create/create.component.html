@@ -9,12 +9,12 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Titel</mat-label>
-      <input matInput [(ngModel)]="book.titel.titel" name="titel_titel" required />
+      <input matInput [(ngModel)]="book.titel.titel" name="titel.titel" required />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Untertitel</mat-label>
-      <input matInput [(ngModel)]="book.titel.untertitel" name="titel_untertitel" />
+      <input matInput [(ngModel)]="book.titel.untertitel" name="titel.untertitel" />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -64,5 +64,6 @@
     <button mat-raised-button class="button" type="submit">Buch erstellen</button>
   </form>
 
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
 </div>

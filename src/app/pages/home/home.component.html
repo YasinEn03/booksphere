@@ -11,6 +11,18 @@
   </button>
 </section>
 
+<mat-card class="stat-card">
+  <mat-card-title>
+    <mat-icon style="font-size: auto; color: #009688;">menu_book</mat-icon>
+    Es erwarten Sie<strong>{{ bookCount }}</strong>Bücher
+  </mat-card-title>
+  <p>
+    Bei <strong>BookSphere</strong> erwarten Sie derzeit <strong>{{ bookCount }}</strong> spannende Bücher.
+    Ob spannendes <span class="highlight">JAVASCRIPT</span>, <span class="highlight">TYPESCRIPT</span> oder neue
+    Bestseller wie <span class="highlight">JAVA</span> – entdecke deine nächste Lektüre jetzt!
+  </p>
+</mat-card>
+
 <div class="features">
   <mat-card class="feature">
     <mat-icon class="feature-icon" color="primary">search</mat-icon>
@@ -20,7 +32,6 @@
       <input matInput placeholder="ISBN eingeben" [(ngModel)]="searchInput" name="searchInput" />
     </mat-form-field>
 
-
     <button (click)="onSearchClick()" class="searchButton" mat-mini-button>
       Suchen
     </button>
@@ -29,10 +40,12 @@
       Finde Bücher nach ID, ISBN oder Schlagwoerter in Sekunden.
     </p>
   </mat-card>
+
   <mat-card class="feature">
     <mat-icon class="feature-icon" color="primary">category</mat-icon>
     <mat-card-title style="margin-top: 15px; font-style: bold">
-      Kategorien entdecken</mat-card-title>
+      Kategorien entdecken
+    </mat-card-title>
     <div class="category-list">
       <button (click)="onKeywordClick('JAVA')" color="primary">JAVA</button>
       <button (click)="onKeywordClick('JAVASCRIPT')" color="primary">JAVASCRIPT</button>
@@ -49,5 +62,12 @@
       <em>"Dank BookSphere habe ich meine Leseliebe wiederentdeckt!"</em>
     </p>
     <footer style="color: black">– Anna M., Buchliebhaberin</footer>
+  </blockquote>
+  <mat-divider></mat-divider>
+  <blockquote>
+    <p style="color: black">
+      <em>"Durch BookSphere konnte ich meinen Horizont erweitern!"</em>
+    </p>
+    <footer style="color: black">– Joussef A., BookSphere Neukunde</footer>
   </blockquote>
 </mat-card>

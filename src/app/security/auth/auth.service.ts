@@ -8,8 +8,8 @@ import { BehaviorSubject, tap } from 'rxjs';
 export class AuthService {
     private tokenKey = 'auth_token';
     private usernameKey = 'username';
-
     private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+
     loggedIn$ = this.loggedInSubject.asObservable();
 
     constructor(

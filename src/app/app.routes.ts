@@ -20,6 +20,5 @@ export const routes: Routes = [
     { path: 'list', component: ListComponent },
     { path: 'access-denied', component: AccessDeniedComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'access-denied', component: AccessDeniedComponent },
     { path: '**', component: PageNotFoundComponent },
 ];

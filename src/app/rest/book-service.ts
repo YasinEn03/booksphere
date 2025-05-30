@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
 
 export interface Titel {
     titel: string;
@@ -36,9 +36,10 @@ export interface Book {
 })
 export class BookService {
     private baseUrl = 'https://localhost:3000/rest';
+    book: Book[] = [];
+
     constructor(private http: HttpClient) {}
 
-    book: Book[] = [];
     getAllBooks(): Observable<Book[]> {
         return this.http
             .get<{ content: Book[] }>(`${this.baseUrl}?size=15`)
@@ -50,28 +51,25 @@ export class BookService {
     }
 
     createBook(book: Book): Observable<Book> {
-        return new Observable<Book>((observer) => {
-            this.getBookByIsbn(book.isbn).subscribe({
-                next: (existingBook) => {
-                    if (existingBook) {
-                        observer.error(
+        return this.getBookByIsbn(book.isbn).pipe(
+            switchMap((existingBook) => {
+                if (existingBook) {
+                    return throwError(
+                        () =>
                             new Error(
                                 'Die eingegebene ISBN existiert bereits.',
                             ),
-                        );
-                    } else {
-                        this.http.post<Book>(this.baseUrl, book).subscribe({
-                            next: (createdBook) => observer.next(createdBook),
-                            error: (err) => observer.error(err),
-                            complete: () => observer.complete(),
-                        });
-                    }
-                },
-                error: (err) => {
-                    observer.error(err);
-                },
-            });
-        });
+                    );
+                }
+                return this.http.post<Book>(this.baseUrl, book);
+            }),
+            catchError((err) => {
+                if (err.status === 404) {
+                    return this.http.post<Book>(this.baseUrl, book);
+                }
+                return throwError(() => err);
+            }),
+        );
     }
 
     updateBook(id: number, book: Book): Observable<Book> {
@@ -79,6 +77,10 @@ export class BookService {
             'If-Match': `"${book.version}"`,
         });
         return this.http.put<Book>(`${this.baseUrl}/${id}`, book, { headers });
+    }
+
+    deleteBook(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/${id}`);
     }
 
     getAllBookIds(): Observable<number[]> {
@@ -89,15 +91,21 @@ export class BookService {
 
     getBookCount(): Observable<number> {
         return this.http
-            .get<{ content: Book[] }>(`${this.baseUrl}`)
+            .get<{ content: Book[] }>(`${this.baseUrl}?size=1000`)
             .pipe(map((response) => response.content.length));
     }
 
     getBookByIsbn(isbn: string): Observable<Book | undefined> {
-        return this.http
-            .get<{ content: Book[] }>(`${this.baseUrl}/?isbn=${isbn}`)
-            .pipe(map((res) => res.content[0]));
+        return this.http.get<Book>(`${this.baseUrl}/?isbn=${isbn}`).pipe(
+            catchError((err) => {
+                if (err.status === 404) {
+                    return of(undefined);
+                }
+                return throwError(() => err);
+            }),
+        );
     }
+
     getBooksBySchlagwoerter(schlagwort: string): Observable<Book[]> {
         return this.getAllBooks().pipe(
             map((books) =>

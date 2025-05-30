@@ -1,6 +1,8 @@
 <div class="adjust-container">
   <h2>Buch aktualisieren</h2>
 
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
   <div class="book-id-buttons">
     <p>Buch auswählen:</p>
     <div class="button-group">
@@ -65,7 +67,6 @@
     </mat-form-field>
 
     <div *ngIf="errorMessage" class="error mat-body-2 text-error">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="success mat-body-2 text-success">{{ successMessage }}</div>
 
     <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Speichern</button>
   </form>

@@ -1,18 +1,20 @@
+/* ------------------------------ Container & Layout ------------------------------ */
 .list-container {
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem 2rem 180px 2rem;
-
   background-color: #f9f9f9;
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
+  /* ------------------------------ Section Title ------------------------------ */
   h2 {
     margin-bottom: 2rem;
     text-align: center;
     color: #004d40;
   }
 
+  /* ------------------------------ Filter Section ------------------------------ */
   .filter-section {
     display: flex;
     gap: 1rem;
@@ -55,6 +57,7 @@
     }
   }
 
+  /* ------------------------------ Book List Grid ------------------------------ */
   .book-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
@@ -62,6 +65,7 @@
     gap: 1rem;
   }
 
+  /* ------------------------------ Individual Book Card ------------------------------ */
   .book-card {
     background-color: #ffffff;
     border: 1px solid #ccc;
@@ -97,12 +101,16 @@
       }
     }
   }
+  /* ------------------------------ Pagination Controls ------------------------------ */
   .pagination {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
 
     button {
+      max-height: 30px;
       padding: 0.5rem 1rem;
       border: 1px solid #ccc;
       cursor: pointer;
@@ -115,18 +123,20 @@
   }
 }
 
+/* ------------------------------ Responsive Design ------------------------------ */
 @media (max-width: 768px) {
   .list-container {
     margin: 4rem 1rem;
     padding-bottom: 140px;
+
     .book-list {
       grid-template-columns: 1fr;
     }
   }
+}
 
-  @media (max-width: 1024px) {
-    .book-list {
-      grid-template-columns: repeat(2, 1fr);
-    }
+@media (max-width: 1024px) {
+  .book-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
