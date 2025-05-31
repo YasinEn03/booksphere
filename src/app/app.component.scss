@@ -1,3 +1,5 @@
+/* --------------------------------- Toolbar Styles --------------------------------- */
+
 .toolbar {
   background-color: #b2dfdb;
   color: #00332f;
@@ -15,10 +17,54 @@
   color: #00695c;
 }
 
-.main-container {
-  display: flex;
-  height: calc(100vh - 64px - 40px);
+/* --------------------------------- Layout Container --------------------------------- */
+
+:host {
+  display: block;
+  height: 100vh;
 }
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1 0 auto;
+  padding: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* --------------------------------- Footer Styles --------------------------------- */
+
+.footer {
+  flex-shrink: 0;
+  padding: 12px 42px;
+  background-color: #b2dfdb;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  font-family:
+    'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.footer-content {
+  color: #004d40;
+}
+
+/* --------------------------------- Router/Link Styling --------------------------------- */
+
+.active-link {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #00796b;
+}
+
+/* --------------------------------- Mat-Menu Styling --------------------------------- */
 
 mat-menu {
   background-color: #ffffff;
@@ -30,34 +76,4 @@ mat-menu button {
 
 mat-menu button:hover {
   background-color: #b2dfdb;
-}
-
-ng-container .span {
-  font-size: small;
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-.active-link {
-  font-weight: bold;
-  text-decoration: underline;
-  color: #00796b;
-}
-
-.footer {
-  position: sticky;
-  margin-top: auto;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 995;
-  padding: 12px 42px;
-  background-color: #b2dfdb;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.footer-content {
-  color: #004d40;
 }

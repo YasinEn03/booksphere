@@ -121,6 +121,18 @@ export class BookService {
         );
     }
 
+    getBooksByTitel(titel: string): Observable<Book[]> {
+        return this.getAllBooks().pipe(
+            map((books) =>
+                books.filter((book) =>
+                    book.titel?.titel
+                        ?.toLowerCase()
+                        .includes(titel.toLowerCase()),
+                ),
+            ),
+        );
+    }
+
     getRandomIsbn(): Observable<string | undefined> {
         return this.getAllBooks().pipe(
             map((books) => {

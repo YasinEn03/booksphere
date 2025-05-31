@@ -101,7 +101,17 @@ export class SearchComponent implements OnInit {
         this.bookService.getBooksBySchlagwoerter(keyword).subscribe({
             next: (books) => {
                 if (books.length === 0) {
-                    this.error = 'Keine Bücher mit diesem Schlagwort gefunden';
+                    // Falls keine Bücher mit Schlagwörtern gefunden wurden, suche nach Titel
+                    this.bookService.getBooksByTitel(keyword).subscribe({
+                        next: (books: Book[]) => {
+                            if (books.length === 0) {
+                                this.books = [];
+                            } else {
+                                this.books = books;
+                            }
+                        },
+                        error: () => (this.error = 'Fehler bei der Titelsuche'),
+                    });
                 } else {
                     this.books = books;
                 }
