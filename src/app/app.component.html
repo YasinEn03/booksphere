@@ -1,46 +1,48 @@
-<mat-toolbar color="primary" class="toolbar">
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="'/home'" *ngIf="router.url !== '/home'">
-      Home
+<div class="page-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
     </button>
-    <button mat-menu-item [routerLink]="'/search'">Suche</button>
-    <button mat-menu-item [routerLink]="'/list'">Bücherliste</button>
-    <button mat-menu-item [routerLink]="'/adjust'" *ngIf="this.authService.hasRole('admin')">
-      Anpassen
-    </button>
-    <button mat-menu-item [routerLink]="'/create'" *ngIf="this.authService.hasRole('admin')"> Hinzufügen </button>
-  </mat-menu>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="'/home'" *ngIf="router.url !== '/home'">
+        Home
+      </button>
+      <button mat-menu-item [routerLink]="'/search'">Suche</button>
+      <button mat-menu-item [routerLink]="'/list'">Bücherliste</button>
+      <button mat-menu-item [routerLink]="'/adjust'" *ngIf="this.authService.hasRole('admin')">
+        Anpassen
+      </button>
+      <button mat-menu-item [routerLink]="'/create'" *ngIf="this.authService.hasRole('admin')"> Hinzufügen </button>
+    </mat-menu>
 
-  <span style="margin-left: 8px">BookSphere</span>
-  <span class="spacer"></span>
-  <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
-  <ng-template #loginLink>
-    <a mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
-  </ng-template>
-  <ng-container *ngIf="isLoggedIn; else loginLink">
-    <span>{{ username }}</span>
-    <button mat-button (click)="logout()">Logout</button>
-  </ng-container>
-</mat-toolbar>
+    <span style="margin-left: 8px">BookSphere</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
+    <ng-template #loginLink>
+      <a mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
+    </ng-template>
+    <ng-container *ngIf="isLoggedIn; else loginLink">
+      <span>{{ username }}</span>
+      <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+  </mat-toolbar>
 
-<div class="content-wrapper">
-  <router-outlet></router-outlet>
-</div>
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
 
-<footer style="
+  <footer style="
     text-align: center;
     color: rgb(255, 255, 255);
     font-family:
       'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
       'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   " class="footer">
-  <div class="footer-content">
-    <p>📚 BookSphere – Dein digitales Bücherregal</p>
-    <a href="/impressum">Impressum</a> |
-    <a href="https://www.youtube.com">Youtube</a> |
-    <a href="https://linkedin.com">LinkedIn</a>
-  </div>
-</footer>
+    <div class="footer-content">
+      <p>📚 BookSphere – Dein digitales Bücherregal</p>
+      <a href="/impressum">Impressum</a> |
+      <a href="https://www.youtube.com">Youtube</a> |
+      <a href="https://linkedin.com">LinkedIn</a>
+    </div>
+  </footer>
+</div>

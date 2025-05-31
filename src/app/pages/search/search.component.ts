@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Book, BookService } from '../../rest/book-service';
+import { SearchTransferService } from '../service/search.transfer-serivce';
 
 @Component({
     selector: 'app-search',
@@ -27,6 +28,8 @@ export class SearchComponent implements OnInit {
     private bookService = inject(BookService);
     private route = inject(ActivatedRoute);
 
+    constructor(private searchTransferService: SearchTransferService) {}
+
     bookId?: number;
     isbn = '';
     books: Book[] = [];
@@ -35,25 +38,25 @@ export class SearchComponent implements OnInit {
     disableSearchForm = false;
 
     ngOnInit() {
-        this.route.queryParams.subscribe((params) => {
-            const idParam = params['id'];
-            const isbnParam = params['isbn'];
-            const keywordParam = params['schlagwort'];
+        const input = this.searchTransferService.getSearchInput();
+        if (!input) return;
 
-            if (idParam || isbnParam || keywordParam) {
-                this.disableSearchForm = true;
-            }
+        this.disableSearchForm = true;
 
-            if (idParam) {
-                this.bookId = +idParam;
-                this.searchById();
-            } else if (isbnParam) {
-                this.isbn = isbnParam;
-                this.searchByIsbn();
-            } else if (keywordParam) {
-                this.searchByKeyword(keywordParam);
-            }
-        });
+        const isbnRegex = /^[\d-]{13,}$/;
+        const idRegex = /^\d+$/;
+
+        if (idRegex.test(input)) {
+            this.bookId = +input;
+            this.searchById();
+        } else if (isbnRegex.test(input)) {
+            this.isbn = input;
+            this.searchByIsbn();
+        } else {
+            this.searchByKeyword(input);
+        }
+
+        this.searchTransferService.clear();
     }
 
     enableSearchForm() {
@@ -98,7 +101,17 @@ export class SearchComponent implements OnInit {
         this.bookService.getBooksBySchlagwoerter(keyword).subscribe({
             next: (books) => {
                 if (books.length === 0) {
-                    this.error = 'Keine Bücher mit diesem Schlagwort gefunden';
+                    // Falls keine Bücher mit Schlagwörtern gefunden wurden, suche nach Titel
+                    this.bookService.getBooksByTitel(keyword).subscribe({
+                        next: (books: Book[]) => {
+                            if (books.length === 0) {
+                                this.books = [];
+                            } else {
+                                this.books = books;
+                            }
+                        },
+                        error: () => (this.error = 'Fehler bei der Titelsuche'),
+                    });
                 } else {
                     this.books = books;
                 }
