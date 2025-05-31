@@ -30,6 +30,8 @@ import { Book, BookService } from '../../rest/book-service';
 })
 export class CreateComponent implements OnInit {
     private bookService = inject(BookService);
+
+    /** Predefined ISBNs used to initialize new books randomly */
     readonly predefinedIsbns: string[] = [
         '978-0-306-40615-7',
         '978-1-56619-909-4',
@@ -41,8 +43,12 @@ export class CreateComponent implements OnInit {
         '978-0-13-110362-7',
     ];
 
+    /**
+     * @param router Angular router for navigation after creating a book
+     */
     constructor(private router: Router) {}
 
+    /** The book object bound to the form */
     book: Book = {
         id: 0,
         isbn: '',
@@ -60,9 +66,16 @@ export class CreateComponent implements OnInit {
         art: 'EPUB',
         schlagwoerter: [],
     };
+
+    /** Error message shown if book creation fails */
     errorMessage: string | null = null;
+
+    /** Success message shown after successful creation */
     successMessage: string | null = null;
 
+    /**
+     * Initializes the form with random and default book values.
+     */
     ngOnInit() {
         const randomIndex = Math.floor(
             Math.random() * this.predefinedIsbns.length,
@@ -79,6 +92,10 @@ export class CreateComponent implements OnInit {
         this.book.schlagwoerter = ['JAVA, JAVASCRIPT'];
     }
 
+    /**
+     * Sends a POST request to create a new book.
+     * @param form The form to validate before submission
+     */
     createBook(form: NgForm): void {
         if (form.invalid) {
             return;
@@ -105,6 +122,9 @@ export class CreateComponent implements OnInit {
         });
     }
 
+    /**
+     * Resets the book form to its initial values.
+     */
     resetForm() {
         this.book = {
             isbn: '',

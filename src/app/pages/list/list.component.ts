@@ -15,12 +15,22 @@ import { FilterService } from '../service/filter-service';
 })
 export class ListComponent implements OnInit {
     books: Book[] = [];
+
+    /** Books after filtering by keywords */
     filteredBooks: Book[] = [];
+
+    /** Books shown on the current page */
     paginatedBooks: Book[] = [];
     loading = true;
     error = '';
+
+    /** Number of books per page */
     pageSize = 6;
+
+    /** Current pagination page */
     currentPage = 1;
+
+    /** Total number of pages for pagination */
     totalPages = 0;
     filterLanguages = {
         JAVA: false,
@@ -29,12 +39,20 @@ export class ListComponent implements OnInit {
         PYTHON: false,
     };
 
+    /**
+     * @param bookService Service for retrieving books from backend
+     * @param filterService Service for handling keyword filtering
+     * @param router Angular Router for navigation
+     */
     constructor(
         private bookService: BookService,
         private filterService: FilterService,
         private router: Router,
     ) {}
 
+    /**
+     * Loads all books and sets up keyword filter subscriptions
+     */
     ngOnInit(): void {
         this.bookService.getAllBooks().subscribe({
             next: (books) => {
@@ -42,6 +60,7 @@ export class ListComponent implements OnInit {
                 this.filteredBooks = books;
                 this.totalPages = Math.ceil(this.books.length / this.pageSize);
                 this.setPage(1);
+
                 this.filterService.selectedKeywords$.subscribe((keywords) => {
                     if (keywords.length === 0) {
                         return;
@@ -62,6 +81,10 @@ export class ListComponent implements OnInit {
             },
         });
     }
+
+    /**
+     * Applies the selected keyword filters to the book list
+     */
     applyFilter() {
         const selectedKeywords = Object.keys(this.filterLanguages).filter(
             (key) =>
@@ -82,6 +105,9 @@ export class ListComponent implements OnInit {
         this.setPage(1);
     }
 
+    /**
+     * Resets all filters and shows all books
+     */
     resetFilter() {
         this.filterLanguages = {
             JAVA: false,
@@ -92,6 +118,10 @@ export class ListComponent implements OnInit {
         this.applyFilter();
     }
 
+    /**
+     * Updates the paginatedBooks based on the selected page
+     * @param page The page number to display
+     */
     setPage(page: number) {
         this.currentPage = page;
         const start = (page - 1) * this.pageSize;
@@ -99,6 +129,10 @@ export class ListComponent implements OnInit {
         this.paginatedBooks = this.filteredBooks.slice(start, end);
     }
 
+    /**
+     * Navigates to the details view for the selected book
+     * @param id ID of the book to view details for
+     */
     goToDetails(id: number | undefined) {
         if (id !== undefined) {
             this.router.navigate(['/detail', id]);

@@ -28,21 +28,31 @@ import { AuthService } from '../../security/auth/auth.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+    /** Reactive form group for login */
     loginForm: FormGroup;
     submitted = false;
     errorMessage = '';
 
+    /**
+     * @param fb FormBuilder for creating the reactive form
+     * @param router Angular Router to navigate on success
+     * @param authService Service to authenticate user
+     */
     constructor(
         private fb: FormBuilder,
         private router: Router,
         private authService: AuthService,
     ) {
+        // Initialize login form with validation
         this.loginForm = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
         });
     }
 
+    /**
+     * Handles form submission and triggers authentication
+     */
     onSubmit() {
         this.submitted = true;
         if (this.loginForm.invalid) {
@@ -63,10 +73,16 @@ export class LoginComponent {
         });
     }
 
+    /**
+     * Getter for the username form control
+     */
     get username() {
         return this.loginForm.get('username');
     }
 
+    /**
+     * Getter for the password form control
+     */
     get password() {
         return this.loginForm.get('password');
     }

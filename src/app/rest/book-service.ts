@@ -34,22 +34,40 @@ export interface Book {
 @Injectable({
     providedIn: 'root',
 })
+
+/**
+ * HTTP-Request services for REST.
+ */
 export class BookService {
     private baseUrl = 'https://localhost:3000/rest';
     book: Book[] = [];
 
     constructor(private http: HttpClient) {}
 
+    /**
+     * Returns all books in the database.
+     * @returns Book[]
+     */
     getAllBooks(): Observable<Book[]> {
         return this.http
             .get<{ content: Book[] }>(`${this.baseUrl}?size=15`)
             .pipe(map((response) => response.content));
     }
 
+    /**
+     * Returns the book searched for by id.
+     * @param id
+     * @returns Book
+     */
     getBookById(id: number): Observable<Book> {
         return this.http.get<Book>(`${this.baseUrl}/${id}`);
     }
 
+    /**
+     * POST-Request for creating a new book.
+     * @param book
+     * @returns
+     */
     createBook(book: Book): Observable<Book> {
         return this.getBookByIsbn(book.isbn).pipe(
             switchMap((existingBook) => {
@@ -72,6 +90,11 @@ export class BookService {
         );
     }
 
+    /**
+     * PUT-Request for updating an already existing book.
+     * @param id
+     * @param book
+     */
     updateBook(id: number, book: Book): Observable<Book> {
         const headers = new HttpHeaders({
             'If-Match': `"${book.version}"`,
@@ -79,16 +102,32 @@ export class BookService {
         return this.http.put<Book>(`${this.baseUrl}/${id}`, book, { headers });
     }
 
+    /**
+     * Deletes a selected book.
+     * @see ListComponent
+     * @param id
+     * @returns
+     */
     deleteBook(id: number): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/${id}`);
     }
 
+    /**
+     * Request to get all books saved in the database.
+     * @see ListComponent
+     * @returns All book ids.
+     */
     getAllBookIds(): Observable<number[]> {
         return this.http
             .get<{ content: Book[] }>(`${this.baseUrl}?size=1000`)
             .pipe(map((response) => response.content.map((book) => book.id!)));
     }
 
+    /**
+     * Returns the amount of books in the database
+     * @see HomeComponent
+     * @returns
+     */
     getBookCount(): Observable<number> {
         return this.http
             .get<{ content: Book[] }>(`${this.baseUrl}?size=1000`)
@@ -109,6 +148,12 @@ export class BookService {
             );
     }
 
+    /**
+     * Search books by "Schlagwoerter" in the homepage.
+     * @see HomeComponent
+     * @param schlagwort
+     * @returns
+     */
     getBooksBySchlagwoerter(schlagwort: string): Observable<Book[]> {
         return this.getAllBooks().pipe(
             map((books) =>
@@ -121,6 +166,12 @@ export class BookService {
         );
     }
 
+    /**
+     * Search books by "Titel" in the homepage.
+     * @see HomeComponent
+     * @param titel
+     * @returns
+     */
     getBooksByTitel(titel: string): Observable<Book[]> {
         return this.getAllBooks().pipe(
             map((books) =>
@@ -133,6 +184,11 @@ export class BookService {
         );
     }
 
+    /**
+     * Gets a random isbn for the search field in the homepage.
+     * @see HomeComponent
+     * @returns
+     */
     getRandomIsbn(): Observable<string | undefined> {
         return this.getAllBooks().pipe(
             map((books) => {

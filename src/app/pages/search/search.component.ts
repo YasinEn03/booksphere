@@ -25,18 +25,38 @@ import { SearchTransferService } from '../service/search.transfer-serivce';
     styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+    /** Injected BookService for data access */
     private bookService = inject(BookService);
+
+    /** Activated route for access to query parameters */
     private route = inject(ActivatedRoute);
 
+    /**
+     * @param searchTransferService Service for transferring search input across components
+     */
     constructor(private searchTransferService: SearchTransferService) {}
 
+    /** Search input as book ID */
     bookId?: number;
+
+    /** Search input as ISBN */
     isbn = '';
+
+    /** List of books as search result */
     books: Book[] = [];
+
+    /** Single book result */
     book?: Book;
+
+    /** Error message if search fails */
     error = '';
+
+    /** Indicates if search form should be disabled (e.g. prefilled input search) */
     disableSearchForm = false;
 
+    /**
+     * Initializes component and determines search type from transfer service
+     */
     ngOnInit() {
         const input = this.searchTransferService.getSearchInput();
         if (!input) return;
@@ -59,11 +79,17 @@ export class SearchComponent implements OnInit {
         this.searchTransferService.clear();
     }
 
+    /**
+     * Enables the search form and resets previous results
+     */
     enableSearchForm() {
         this.disableSearchForm = false;
         this.resetResult();
     }
 
+    /**
+     * Searches for a book by its ID
+     */
     searchById() {
         this.resetResult();
         if (!this.bookId) {
@@ -77,6 +103,9 @@ export class SearchComponent implements OnInit {
         });
     }
 
+    /**
+     * Searches for a book by its ISBN
+     */
     searchByIsbn() {
         this.resetResult();
         if (!this.isbn.trim()) {
@@ -90,6 +119,10 @@ export class SearchComponent implements OnInit {
         });
     }
 
+    /**
+     * Searches for books by keyword (e.g. tag or title)
+     * @param keyword The keyword to search for
+     */
     searchByKeyword(keyword: string) {
         this.resetResult();
 
@@ -101,7 +134,7 @@ export class SearchComponent implements OnInit {
         this.bookService.getBooksBySchlagwoerter(keyword).subscribe({
             next: (books) => {
                 if (books.length === 0) {
-                    // Falls keine Bücher mit Schlagwörtern gefunden wurden, suche nach Titel
+                    // If no books found by keyword, fallback to title search
                     this.bookService.getBooksByTitel(keyword).subscribe({
                         next: (books: Book[]) => {
                             if (books.length === 0) {
@@ -120,6 +153,9 @@ export class SearchComponent implements OnInit {
         });
     }
 
+    /**
+     * Resets current search result state
+     */
     private resetResult() {
         this.book = undefined;
         this.books = [];
