@@ -114,8 +114,16 @@ export class SearchComponent implements OnInit {
         }
 
         this.bookService.getBookByIsbn(this.isbn).subscribe({
-            next: (b) => (this.book = b),
-            error: () => (this.error = 'Buch mit dieser ISBN nicht gefunden'),
+            next: (b) => {
+                if (!b) {
+                    this.error = 'Buch mit dieser ISBN nicht gefunden';
+                    return;
+                } else {
+                    this.book = b;
+                }
+            },
+            error: () =>
+                (this.error = `Buch mit der ISBN: ${this.isbn} wurde nicht gefunden`),
         });
     }
 
