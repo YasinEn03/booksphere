@@ -56,15 +56,14 @@
   display: flex;
   flex-direction: column;
   color: #006064;
-  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
   padding: 2rem 1rem;
 }
 
 .welcome-header {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
   font-size: 20px;
   max-height: 100px;
   animation: scaleWords 0.8s ease-out forwards;
