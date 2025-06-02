@@ -45,7 +45,6 @@ export class DetailComponent implements OnInit {
      * and checks if the user is an admin.
      */
     ngOnInit(): void {
-        this.isAdmin = this.authService.hasRole('admin');
         const idParam = this.route.snapshot.paramMap.get('id');
         const id = idParam ? +idParam : null;
 

@@ -10,6 +10,7 @@ import { AdjustComponent } from './rest/adjust/adjust.component';
 import { CreateComponent } from './rest/create/create.component';
 import { SearchComponent } from './rest/search/search.component';
 import { AdminGuard } from './security/auth/admin.guard';
+import { LoginGuard } from './security/auth/login.guard';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -19,7 +20,7 @@ export const routes: Routes = [
     { path: 'create', component: CreateComponent, canActivate: [AdminGuard] },
     { path: 'detail/:id', component: DetailComponent },
     { path: 'list', component: ListComponent },
-    { path: 'user', component: UserComponent },
+    { path: 'user', component: UserComponent, canActivate: [LoginGuard] },
     { path: 'access-denied', component: AccessDeniedComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent },
