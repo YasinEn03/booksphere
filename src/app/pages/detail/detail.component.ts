@@ -7,8 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { timeout } from 'rxjs';
 import { Book, BookService } from '../../rest/book-service';
 import { AuthService } from '../../security/auth/auth.service';
-import { BookTransferService } from '../service/book.transfer-service';
-import { FilterService } from '../service/filter-service';
+import { BookTransferService } from '../../service/book.transfer-service';
+import { FilterService } from '../../service/filter-service';
 
 @Component({
     selector: 'app-detail',

@@ -10,8 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
 import { BookService } from '../../rest/book-service';
-import { FilterService } from '../service/filter-service';
-import { SearchTransferService } from '../service/search.transfer-serivce';
+import { FilterService } from '../../service/filter-service';
+import { SearchTransferService } from '../../service/search.transfer-serivce';
 
 @Component({
     selector: 'app-home',

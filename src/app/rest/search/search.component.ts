@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Book, BookService } from '../../rest/book-service';
-import { SearchTransferService } from '../service/search.transfer-serivce';
+import { SearchTransferService } from '../../service/search.transfer-serivce';
 
 @Component({
     selector: 'app-search',

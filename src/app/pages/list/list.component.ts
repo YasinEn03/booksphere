@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { Book, BookService } from '../../rest/book-service';
-import { FilterService } from '../service/filter-service';
+import { FilterService } from '../../service/filter-service';
 
 @Component({
     selector: 'app-list',

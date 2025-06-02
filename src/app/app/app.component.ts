@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from './security/auth/auth.service';
+import { AuthService } from '../security/auth/auth.service';
 
 @Component({
     selector: 'app-root',

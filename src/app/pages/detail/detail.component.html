@@ -1,5 +1,7 @@
 <ng-container *ngIf="!isLoading && book; else loadingOrError">
   <mat-card class="detail-container">
+
+    <!-- Shows one book with all details containing in it -->
     <mat-card-header>
       <mat-card-title>
         <h1>{{ book.titel.titel }}</h1>
@@ -53,6 +55,7 @@
   </mat-card>
 </ng-container>
 
+<!-- Error while loading the book -->
 <ng-template #loadingOrError>
   <div *ngIf="isLoading" class="detail-container">
     <mat-spinner diameter="40"></mat-spinner>

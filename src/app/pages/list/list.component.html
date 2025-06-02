@@ -1,6 +1,7 @@
 <div class="list-container">
   <h2>Bücherliste</h2>
 
+  <!-- Checkbox filter -->
   <div class="filter-section">
     <label>
       <input type="checkbox" [(ngModel)]="filterLanguages.JAVA" (change)="applyFilter()" />
@@ -23,6 +24,7 @@
     </button>
   </div>
 
+  <!-- Displays books equivalent to filter -->
   <div class="book-list">
     <mat-card class="book-card" *ngFor="let book of paginatedBooks" (click)="goToDetails(book.id)" tabindex="0"
       role="button" [attr.aria-label]="'Details zu ' + book.titel.titel">
@@ -46,6 +48,7 @@
     </mat-card>
   </div>
 
+  <!-- Paginator -->
   <div class="pagination" *ngIf="totalPages > 1">
     <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="setPage(i + 1)"
       [disabled]="currentPage === i + 1">

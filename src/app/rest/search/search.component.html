@@ -1,6 +1,6 @@
 <div class="search-container">
   <h2>Buchsuche</h2>
-
+  <!-- Search Form ID & ISBN -->
   <form class="search-form" (submit)="false">
     <div class="search-row">
       <mat-form-field appearance="outline" class="search-field">
@@ -25,8 +25,10 @@
     </div>
   </form>
 
+  <!-- Errormsg. if request does not responds with a book anything-->
   <p class="error" *ngIf="error">{{ error }}</p>
 
+  <!-- Response as a card containing some informations about the resulting book -->
   <div class="card" *ngIf="book">
     <h3>Buch-ID: {{ book.id }}</h3>
     <p><strong>ISBN:</strong> {{ book.isbn }}</p>
@@ -37,12 +39,14 @@
     <button routerLink="/detail/{{ book.id }}" mat-stroked-button color="primary">Details ansehen</button>
   </div>
 
+  <!-- Disabled if redirected from homepage  -->
   <div *ngIf="disableSearchForm" style="margin-top: 20px;">
     <button mat-stroked-button color="primary" (click)="enableSearchForm()">
       Suche nach anderen Büchern
     </button>
   </div>
 
+  <!-- Results when redirected by homepage to search -->
   <div class="multi-result" *ngIf="books.length > 0">
     <h3>Suchergebnisse ({{ books.length }})</h3>
     <mat-card *ngFor="let b of books" class="book-card">

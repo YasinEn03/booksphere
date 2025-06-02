@@ -1,8 +1,10 @@
 <div class="adjust-container">
   <h2>Buch aktualisieren</h2>
 
+  <!-- If book was loaded successfully -->
   <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
 
+  <!-- Buttons to load a book by id from database -->
   <div class="book-id-buttons">
     <p>Buch auswählen:</p>
     <div class="button-group">
@@ -12,6 +14,7 @@
     </div>
   </div>
 
+  <!-- Forms to fill depending on what prop of the book wanted to be changed -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="book-form">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>ISBN</mat-label>
@@ -48,7 +51,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Preis</mat-label>
-      <input matInput type="number" step="0.01" id="preis" formControlName="preis" />
+      <input matInput type="number" step="1.00" id="preis" formControlName="preis" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
@@ -61,7 +64,6 @@
         Rabatt darf höchstens 1 sein
       </mat-error>
     </mat-form-field>
-
 
     <mat-checkbox formControlName="lieferbar" class="full-width">Lieferbar</mat-checkbox>
 
@@ -82,9 +84,10 @@
       <input matInput id="schlagwoerter" formControlName="schlagwoerter" />
     </mat-form-field>
 
+    <!-- Error message if update fails-->
     <div *ngIf="errorMessage" class="error mat-body-2 text-error">{{ errorMessage }}</div>
 
+    <!-- Submit button -->
     <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Speichern</button>
   </form>
-  <div style="height: 100px;"></div>
 </div>
