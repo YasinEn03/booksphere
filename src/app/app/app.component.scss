@@ -1,20 +1,38 @@
 /* --------------------------------- Toolbar Styles --------------------------------- */
 
 .toolbar {
-  background-color: #b2dfdb;
-  color: #00332f;
+  background: linear-gradient(135deg, #b2ebf2, #4dd0e1);
+  color: #004d40;
+  box-shadow: 0 2px 8px rgba(0, 150, 136, 0.15);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.toolbar:hover {
+  background: linear-gradient(135deg, #4dd0e1, #00bcd4);
+  box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
 }
 
 .toolbar mat-icon,
 .toolbar button,
 .toolbar a {
-  color: #00332f;
+  color: #004d40;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.toolbar mat-icon:hover,
+.toolbar button:hover,
+.toolbar a:hover {
+  color: #007c91;
 }
 
 .toolbar a.active-link {
-  font-weight: bold;
+  font-weight: 700;
   text-decoration: underline;
-  color: #00695c;
+  color: #0097a7;
+  transition: color 0.3s ease;
 }
 
 /* --------------------------------- Layout Container --------------------------------- */
@@ -22,17 +40,22 @@
 :host {
   display: block;
   height: 100vh;
+  background: #e0f7fa;
 }
 
 .page-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: #e0f7fa;
 }
 
 .content-wrapper {
   flex: 1 0 auto;
-  padding: 16px;
+  padding: 16px 24px;
+  color: #004d40;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  transition: color 0.3s ease;
 }
 
 .spacer {
@@ -44,36 +67,58 @@
 .footer {
   flex-shrink: 0;
   padding: 12px 42px;
-  background-color: #b2dfdb;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, #b2ebf2, #4dd0e1);
+  box-shadow: 0 -2px 8px rgba(0, 121, 107, 0.1);
   text-align: center;
   font-family:
     'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #004d40;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.footer:hover {
+  background: linear-gradient(135deg, #4dd0e1, #00bcd4);
+  box-shadow: 0 -4px 15px rgba(0, 121, 107, 0.25);
 }
 
 .footer-content {
   color: #004d40;
+  font-weight: 600;
 }
 
 /* --------------------------------- Router/Link Styling --------------------------------- */
 
 .active-link {
-  font-weight: bold;
+  font-weight: 700;
   text-decoration: underline;
-  color: #00796b;
+  color: #0097a7;
+  transition: color 0.3s ease;
 }
 
 /* --------------------------------- Mat-Menu Styling --------------------------------- */
 
 mat-menu {
   background-color: #ffffff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 4px 0;
+  transition: box-shadow 0.3s ease;
 }
 
 mat-menu button {
   color: #004d40;
+  padding: 8px 24px;
+  font-weight: 600;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 mat-menu button:hover {
-  background-color: #b2dfdb;
+  background: linear-gradient(90deg, #b2ebf2, #4dd0e1);
+  color: #007c91;
+  cursor: pointer;
 }

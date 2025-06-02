@@ -3,31 +3,45 @@
   margin: 3rem auto;
   padding: 2rem;
   padding-bottom: 12rem;
-  background-color: #f8f9fa;
+  background: linear-gradient(135deg, #e0f2f1, #b2dfdb);
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 15px rgba(0, 150, 136, 0.15);
   max-height: 950px;
+  transition: box-shadow 0.3s ease;
+}
+
+.create-container:hover {
+  box-shadow: 0 10px 25px rgba(0, 150, 136, 0.3);
 }
 
 .h2 {
   margin-bottom: 1.5rem;
   text-align: center;
-  font-weight: bold;
-  color: #329792;
+  font-weight: 700;
+  color: #004d40;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 2px rgba(0, 77, 64, 0.3);
 }
 
 .button {
   margin: 0.25rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #329792;
+  background: linear-gradient(135deg, #00796b, #004d40);
   color: white;
   border-radius: 0.5rem;
   cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 121, 107, 0.5);
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.15s ease;
+}
 
-  &:hover {
-    background-color: #329792;
-  }
+.button:hover {
+  background: linear-gradient(135deg, #004d40, #002a22);
+  box-shadow: 0 8px 18px rgba(0, 75, 64, 0.7);
+  transform: scale(1.05);
 }
 
 .form {
@@ -37,11 +51,15 @@
 }
 
 .success {
-  color: green;
+  color: #388e3c;
   margin-top: 1rem;
+  font-weight: 700;
+  text-shadow: 0 0 3px rgba(56, 142, 60, 0.5);
 }
 
 .error {
-  color: red;
+  color: #d32f2f;
   margin-top: 1rem;
+  font-weight: 700;
+  text-shadow: 0 0 3px rgba(211, 47, 47, 0.5);
 }

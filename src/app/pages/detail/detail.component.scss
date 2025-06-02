@@ -2,38 +2,45 @@
   padding: 2rem;
   max-width: 800px;
   margin: 2rem auto;
-  background-color: #e0f2f1;
+  background: linear-gradient(135deg, #ffffff, #e0f7fa);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 188, 212, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  animation: scaleWords 0.6s ease-out forwards;
 
   h1 {
     font-size: 2rem;
-    color: #004d40;
+    color: #006064;
     margin-bottom: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 188, 212, 0.1);
   }
 
   h2 {
     font-size: 1.2rem;
-    color: #00695c;
+    color: #00acc1;
     margin-bottom: 1rem;
+    font-weight: 600;
   }
 
   p {
     margin: 0.4rem 0;
-    color: #00332f;
+    color: #004d40;
     font-size: 1rem;
+    transition: color 0.3s ease;
   }
 
   a {
-    color: #00796b;
+    color: #00acc1;
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
 
     &:hover {
       text-decoration: underline;
+      color: #006064;
     }
   }
 
@@ -44,13 +51,14 @@
   .meta {
     margin-top: 2rem;
     font-size: 0.85rem;
-    color: #555;
+    color: #666;
   }
 
   .error {
     color: #d32f2f;
     font-weight: bold;
     margin-top: 1rem;
+    animation: highlightZoom 0.5s ease-out forwards;
   }
 
   .admin-actions {
@@ -61,59 +69,74 @@
     width: 100%;
 
     button {
-      padding: 0.5rem 1.5rem;
+      padding: 0.6rem 1.2rem;
       font-size: 1rem;
       border-radius: 6px;
       border: none;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      font-weight: 600;
+      transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 
       &:first-child {
-        background-color: #d32f2f;
+        background: linear-gradient(to right, #d32f2f, #b71c1c);
         color: white;
+        box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
 
         &:hover {
-          background-color: #b71c1c;
+          background: linear-gradient(to right, #c62828, #b71c1c);
+          transform: scale(1.05);
+          box-shadow: 0 6px 14px rgba(183, 28, 28, 0.4);
         }
       }
 
       &:last-child {
-        background-color: #00796b;
+        background: linear-gradient(to right, #00bcd4, #0097a7);
         color: white;
+        box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3);
 
         &:hover {
-          background-color: #004d40;
+          background: linear-gradient(to right, #0097a7, #006064);
+          transform: scale(1.05);
+          box-shadow: 0 6px 14px rgba(0, 121, 107, 0.4);
         }
       }
     }
   }
-  /*
-  .image-container {
-    margin-top: 2rem;
-    width: 100%;
 
-    h3 {
-      color: #004d40;
-      margin-bottom: 0.5rem;
-    }
+  // .image-container {
+  //   margin-top: 2rem;
+  //   width: 100%;
 
-    .image {
-      margin-bottom: 1rem;
+  //   h3 {
+  //     color: #006064;
+  //     margin-bottom: 0.5rem;
+  //     font-weight: 600;
+  //   }
 
-      img {
-        max-width: 100%;
-        border-radius: 8px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-        display: block;
-        margin: 0 auto;
-      }
+  //   .image {
+  //     margin-bottom: 1rem;
 
-      p {
-        font-size: 0.9rem;
-        color: #444;
-        margin-top: 0.25rem;
-      }
-    }
-  }
-*/
+  //     img {
+  //       max-width: 100%;
+  //       border-radius: 8px;
+  //       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  //       display: block;
+  //       margin: 0 auto;
+  //       transition: transform 0.3s ease;
+
+  //       &:hover {
+  //         transform: scale(1.03);
+  //       }
+  //     }
+
+  //     p {
+  //       font-size: 0.9rem;
+  //       color: #555;
+  //       margin-top: 0.25rem;
+  //     }
+  //   }
+  // }
 }

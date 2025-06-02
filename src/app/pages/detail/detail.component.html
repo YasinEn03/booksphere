@@ -21,7 +21,7 @@
       <p><strong>Datum:</strong> {{ book.datum | date:'longDate' }}</p>
 
       <p><strong>Homepage:</strong>
-        <a *ngIf="book.homepage" [href]="book.homepage" target="_blank">{{ book.homepage }}</a>
+        <a *ngIf="book.homepage" [href]="book.homepage" target="_blank"> {{ book.homepage }}</a>
       </p>
 
       <div *ngIf="book.schlagwoerter?.length">
