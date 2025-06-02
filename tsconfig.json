@@ -1,9 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "types": [
-      "cypress"
-    ],
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -19,10 +16,6 @@
     "target": "ES2022",
     "module": "ES2022"
   },
-  "include": [
-    "**/*.cy.ts",
-    "cypress/**/*.ts"
-  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

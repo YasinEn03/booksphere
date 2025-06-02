@@ -37,6 +37,10 @@
       Suchen
     </button>
 
+    <p *ngIf="warningMessage" style="color: red; margin-top: 10px;">
+      {{ warningMessage }}
+    </p>
+
     <p style="margin-top: 15px;">
       Finde Bücher nach <strong>ID</strong>, <strong>ISBN</strong>, <strong>Titel</strong> oder
       <strong>Schlagwoerter</strong> in Sekunden.

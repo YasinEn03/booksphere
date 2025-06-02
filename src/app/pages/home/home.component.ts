@@ -33,6 +33,7 @@ import { SearchTransferService } from '../service/search.transfer-serivce';
 export class HomeComponent implements OnInit {
     bookCount = 0;
     searchInput = '';
+    warningMessage = '';
 
     constructor(
         private bookService: BookService,
@@ -58,10 +59,13 @@ export class HomeComponent implements OnInit {
 
     onSearchClick() {
         const input = this.searchInput.trim();
+
         if (!input) {
-            alert('Bitte etwas eingeben!');
+            this.warningMessage = 'Bitte etwas eingeben!';
             return;
         }
+
+        this.warningMessage = '';
         this.searchTransferService.setSearchInput(input);
         this.router.navigate(['/search']);
     }

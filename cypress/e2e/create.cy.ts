@@ -23,6 +23,7 @@ describe('Create Book', () => {
         cy.get('button[type="submit"]').click();
 
         cy.url().should('include', '/list');
+        cy.get('button').contains('2').click();
         cy.contains('mat-card', 'Neues Buch').should('exist');
     });
 
@@ -54,5 +55,6 @@ describe('Create Book', () => {
         cy.get('input[name="schlagwoerter"]').clear().type('Fehler, Fehler');
 
         cy.get('button[type="submit"]').click();
+        cy.url().should('not.include', '/list');
     });
 });

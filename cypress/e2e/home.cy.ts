@@ -3,43 +3,40 @@ describe('HomeComponent', () => {
         cy.visit('/');
     });
 
-    it('lädt die Seite und zeigt den Willkommenstext an', () => {
+    it('loads the page and displays welcome text', () => {
         cy.contains('Willkommen bei BookSphere').should('be.visible');
     });
 
-    it('führt Suche per Button aus', () => {
+    it('performs search via button click', () => {
         cy.get('input[placeholder="ISBN eingeben"]').clear().type('Beta');
         cy.get('button').contains('Suchen').click();
-
         cy.url().should('include', '/search');
     });
 
-    it('führt Suche per Enter-Taste aus', () => {
+    it('performs search via Enter key', () => {
         cy.get('input[placeholder="ISBN eingeben"]')
             .clear()
             .type('Alpha{enter}');
-
         cy.url().should('include', '/search');
     });
 
-    it('zeigt Alert bei leerem Suchfeld', () => {
+    it('shows warning when search input is empty', () => {
         cy.visit('/');
-        cy.window().then((win) => cy.stub(win, 'alert').as('alert'));
-        cy.get('input[placeholder="ISBN eingeben"]').clear();
+        cy.get('input[placeholder="ISBN eingeben"]')
+            .clear()
+            .invoke('val', '')
+            .trigger('input');
         cy.get('input[placeholder="ISBN eingeben"]').should('be.empty');
         cy.get('button').contains('Suchen').click();
-        cy.get('@alert').should(
-            'have.been.calledWith',
-            'Bitte etwas eingeben!',
-        );
+        cy.contains('Bitte etwas eingeben!').should('be.visible');
     });
 
-    it('navigiert zu /list bei Klick auf JAVA-Keyword', () => {
+    it('navigates to /list when JAVA keyword is clicked', () => {
         cy.get('button').contains('JAVA').click();
         cy.url().should('include', '/list');
     });
 
-    it('navigiert zu Login-Seite bei Klick auf Login in Toolbar', () => {
+    it('navigates to login page and logs in as admin', () => {
         cy.get('a').contains('Login').click();
         cy.url().should('include', '/login');
         cy.get('input[formControlName="username"]').type('admin');
@@ -47,12 +44,11 @@ describe('HomeComponent', () => {
         cy.get('button').contains('Einloggen').click();
         cy.url().should('include', '/');
         cy.get('button[mat-icon-button]').click();
-
         cy.get('button').contains('Anpassen').should('be.visible');
         cy.get('button').contains('Hinzufügen').should('be.visible');
     });
 
-    it('benutzt Admin-Funktionen nach Login als "admin"', () => {
+    it('uses admin features after logging in as admin', () => {
         cy.get('a').contains('Login').click();
         cy.get('input[formControlName="username"]').type('admin');
         cy.get('input[formControlName="password"]').type('p');
@@ -64,7 +60,7 @@ describe('HomeComponent', () => {
         cy.get('button').contains('Hinzufügen').should('be.visible').click();
     });
 
-    it('Toolbar zeigt keine Admin-Funktionen nach Login als "user"', () => {
+    it('toolbar shows no admin features after logging in as user', () => {
         cy.get('a').contains('Login').click();
         cy.get('input[formControlName="username"]').type('user');
         cy.get('input[formControlName="password"]').type('p');

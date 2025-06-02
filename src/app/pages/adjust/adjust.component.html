@@ -16,6 +16,9 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>ISBN</mat-label>
       <input matInput id="isbn" formControlName="isbn" />
+      <mat-error *ngIf="form.get('isbn')?.hasError('required')">
+        ISBN ist erforderlich
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
@@ -26,6 +29,12 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Rating (0–5)</mat-label>
       <input matInput type="number" id="rating" formControlName="rating" />
+      <mat-error *ngIf="form.get('rating')?.hasError('min')">
+        Rating muss mindestens 0 sein
+      </mat-error>
+      <mat-error *ngIf="form.get('rating')?.hasError('max')">
+        Rating darf höchstens 5 sein
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
@@ -44,8 +53,15 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Rabatt (0–1)</mat-label>
-      <input matInput type="number" step="0.01" id="rabatt" formControlName="rabatt" />
+      <input matInput type="number" step="0.01" id="rabatt" formControlName="rabatt" min="0" max="1" />
+      <mat-error *ngIf="form.get('rabatt')?.hasError('min')">
+        Rabatt muss mindestens 0 sein
+      </mat-error>
+      <mat-error *ngIf="form.get('rabatt')?.hasError('max')">
+        Rabatt darf höchstens 1 sein
+      </mat-error>
     </mat-form-field>
+
 
     <mat-checkbox formControlName="lieferbar" class="full-width">Lieferbar</mat-checkbox>
 
