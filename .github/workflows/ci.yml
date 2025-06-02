@@ -1,34 +1,28 @@
-name: Cypress E2E Tests
+name: Run E2E Tests
 
 on:
   push:
-    branches: [main]
-  pull_request:
+    branches:
+      - main
 
 jobs:
-  e2e:
+  e2e-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
 
-      - name: Install dependencies
-        run: npm ci
+    - name: Install Dependencies
+      run: npm install
 
-      - name: Start Angular server
-        run: npm start &
-      
-      - name: Wait for Angular server to be ready
-        uses: softprops/wait-for@v1
-        with:
-          url: 'http://localhost:4200'
-          timeout: '60'
+    - name: Build Angular Project
+      run: npm run build
 
-      - name: Run Cypress tests
-        run: npm run cypress:run
+    - name: Run E2E Tests
+      run: npm run e2e
