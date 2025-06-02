@@ -5,13 +5,13 @@
     <img src="/booksphereLogo.png" alt="Icon" style="width: 60px; height: 80px; vertical-align: middle">
     <span style="margin-left: 8px">BookSphere</span>
     <span class="spacer"></span>
-    <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
+    <a mat-button routerLink="/home">Home</a>
     <ng-template #loginLink>
-      <a mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
+      <a mat-button routerLink="/login">Login</a>
     </ng-template>
     <ng-container *ngIf="isLoggedIn; else loginLink">
       <button mat-button (click)="logout()">Logout</button>
-      <span>{{ username }}</span>
+      <a mat-button routerLink="/user">{{ username }}</a>
     </ng-container>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>menu</mat-icon>

@@ -1,0 +1,46 @@
+mat-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #fafafa;
+
+  mat-card-title {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    margin: 0.3rem 0;
+    color: #333;
+  }
+
+  h3 {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  mat-list-item {
+    align-items: center;
+    overflow: visible;
+
+    mat-icon {
+      font-size: 18px;
+      line-height: 1;
+      height: 18px;
+      width: 18px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+  }
+}
+
+p[ng-template] {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 2rem;
+}

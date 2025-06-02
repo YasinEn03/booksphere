@@ -99,10 +99,11 @@ export class AuthService {
         return roles.includes(role);
     }
 
-    private decodeToken(token: string): any | null {
+    public decodeToken(token: string): any | null {
         try {
             const payload = token.split('.')[1];
             return JSON.parse(atob(payload));
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
             return null;
         }

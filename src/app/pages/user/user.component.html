@@ -1,0 +1,42 @@
+<ng-container *ngIf="userInfo && userInfo.username; else noUser">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Benutzerprofil</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p><strong>User-ID:</strong> {{ userInfo.sub }}</p>
+      <p><strong>Benutzername:</strong> {{ userInfo.username }}</p>
+      <p *ngIf="userInfo.email"><strong>Email:</strong> {{ userInfo.email }}</p>
+      <p *ngIf="userInfo.emailVerified"><strong>Email bestätigt:</strong> Ja</p>
+      <p *ngIf="userInfo.givenName"><strong>Vorname:</strong> {{ userInfo.givenName }}</p>
+      <p *ngIf="userInfo.familyName"><strong>Nachname:</strong> {{ userInfo.familyName }}</p>
+      <p *ngIf="userInfo.issuedAtStr"><strong>Ausgestellt am:</strong> {{ userInfo.issuedAtStr }}</p>
+      <p *ngIf="userInfo.expirationStr"><strong>Gültig bis:</strong> {{ userInfo.expirationStr }}</p>
+
+      <mat-divider style="margin: 20px 0;"></mat-divider>
+
+      <h3>Rollen:</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let role of userInfo.roles">
+          <mat-icon matListIcon>verified_user</mat-icon>
+          <span matLine>{{ role }}</span>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-divider style="margin: 20px 0;" *ngIf="userInfo.groups?.length"></mat-divider>
+
+      <h3 *ngIf="userInfo.groups?.length">Gruppen:</h3>
+      <mat-list *ngIf="userInfo.groups?.length">
+        <mat-list-item *ngFor="let group of userInfo.groups">
+          <mat-icon matListIcon>group</mat-icon>
+          <span matLine>{{ group }}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-template #noUser>
+  <p>Kein Benutzer angemeldet.</p>
+</ng-template>
