@@ -17,9 +17,15 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
+        
+    - name: Install Dependencies (inkl. CI-Only Dev-Tools)
+      run: npm ci
+      env:
+        CI: true
 
-    - name: Install Dependencies
-      run: npm install
+    - name: Install Cypress + start-server-and-test (nur im Workflow)
+      run: |
+        npm install --no-save cypress start-server-and-test
 
     - name: Build Angular Project
       run: npm run build
