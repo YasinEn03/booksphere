@@ -30,8 +30,5 @@ jobs:
       - name: Build Angular Project
         run: npm run build
 
-      - name: Wait for frontend
-        run: npx wait-on http://localhost:4200
-
       - name: Run E2E Tests
-        run: npm run e2e
+        run: ng e2e
