@@ -29,12 +29,17 @@
     <mat-card-title style="margin-top: 15px">Intelligente Suche</mat-card-title>
 
     <mat-form-field appearance="outline" style="margin-top: 15px; width: 100%">
-      <input matInput placeholder="ISBN eingeben" [(ngModel)]="searchInput" name="searchInput" />
+      <input matInput placeholder="ISBN eingeben" (keyup.enter)="onSearchClick()" [(ngModel)]="searchInput"
+        name="searchInput" />
     </mat-form-field>
 
     <button (click)="onSearchClick()" class="searchButton" mat-mini-button>
       Suchen
     </button>
+
+    <p *ngIf="warningMessage" style="color: red; margin-top: 10px;">
+      {{ warningMessage }}
+    </p>
 
     <p style="margin-top: 15px;">
       Finde Bücher nach <strong>ID</strong>, <strong>ISBN</strong>, <strong>Titel</strong> oder

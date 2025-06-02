@@ -33,8 +33,13 @@ import { BookTransferService } from '../service/book.transfer-service';
     ],
     styleUrls: ['./adjust.component.scss'],
 })
+/**
+ * Component for adjusting (editing) book data.
+ */
 export class AdjustComponent implements OnInit {
     form!: FormGroup;
+
+    //ID of the currently loaded book
     bookId!: number;
     book!: Book;
     errorMessage: string | null = null;
@@ -48,14 +53,18 @@ export class AdjustComponent implements OnInit {
         private bookTransferService: BookTransferService,
     ) {}
 
+    /**
+     * Initializes the form, loads book IDs, and populates the form
+     * with a transferred or route-based book.
+     */
     ngOnInit(): void {
         this.form = this.fb.group({
-            isbn: [''],
-            version: 0,
-            rating: [0],
+            isbn: ['', [Validators.required]],
+            version: [0],
+            rating: [0, [Validators.min(0), Validators.max(5)]],
             art: ['EPUB'],
             preis: [0],
-            rabatt: [0],
+            rabatt: [0, [Validators.min(0), Validators.max(1)]],
             lieferbar: [false],
             datum: [''],
             homepage: [''],
@@ -66,22 +75,24 @@ export class AdjustComponent implements OnInit {
             }),
         });
 
+        // Load all available book IDs
         this.bookService.getAllBookIds().subscribe({
             next: (ids) => {
                 this.buchIds = ids;
             },
             error: (err) => {
-                console.error('Fehler beim Laden der Buch-IDs:', err);
+                console.error('Error loading book IDs:', err);
             },
         });
 
+        // Load book from transfer service or route state
         this.bookTransferService.getBook().subscribe((book) => {
             if (book) {
                 this.book = book;
                 this.bookId = book.id!;
                 this.initForm(book);
                 this.errorMessage = null;
-                this.successMessage = `Buch mit der ID ${this.bookId} wurde erfolgreich geladen.`;
+                this.successMessage = `Book with ID ${this.bookId} loaded successfully.`;
             } else {
                 const idFromRoute =
                     this.router.getCurrentNavigation()?.extras.state?.[
@@ -94,42 +105,60 @@ export class AdjustComponent implements OnInit {
         });
     }
 
+    /**
+     * Loads a book by its ID and populates the form with its data.
+     * @param id - ID of the book to load
+     */
     buchLaden(id: number): void {
         this.bookService.getBookById(id).subscribe({
             next: (book) => {
                 this.bookId = id;
                 this.book = book;
                 this.initForm(book);
-                this.successMessage = null;
+                this.successMessage = `Book with ID ${id} loaded successfully.`;
                 this.errorMessage = null;
             },
             error: (err) => {
-                this.errorMessage = 'Buch konnte nicht geladen werden.';
+                this.errorMessage = 'Book could not be loaded.';
                 this.successMessage = null;
                 console.error(err);
             },
         });
     }
 
+    /**
+     * Populates the form with book data.
+     * @param book - Book object to populate the form with
+     */
     initForm(book: Book): void {
-        this.form = this.fb.group({
-            isbn: [book.isbn, [Validators.required]],
-            version: [book.version],
-            rating: [book.rating ?? 0, [Validators.min(0), Validators.max(5)]],
-            art: [book.art],
-            preis: [book.preis],
-            rabatt: [book.rabatt],
-            lieferbar: [book.lieferbar],
-            datum: [book.datum],
-            homepage: [book.homepage],
-            schlagwoerter: [book.schlagwoerter.join(', ')],
+        if (!this.form) return;
+
+        this.form.patchValue({
+            isbn: book.isbn,
+            version: book.version,
+            rating: book.rating ?? 0,
+            art: book.art,
+            preis: book.preis,
+            rabatt: book.rabatt,
+            lieferbar: book.lieferbar,
+            datum: book.datum,
+            homepage: book.homepage,
+            schlagwoerter: book.schlagwoerter.join(', '),
         });
     }
 
+    /**
+     * Returns the current book version or 0 if not available.
+     * @returns Book version number
+     */
     getVersion(): number {
         return this.book?.version ?? 0;
     }
 
+    /**
+     * Submits the form, updates the book via the service,
+     * and redirects to the detail page on success.
+     */
     onSubmit(): void {
         if (this.form.invalid) return;
 
@@ -138,6 +167,7 @@ export class AdjustComponent implements OnInit {
         const updatedBook: Book = {
             ...this.book,
             ...formValue,
+            version: this.book.version,
             schlagwoerter: formValue.schlagwoerter
                 ? formValue.schlagwoerter
                       .split(',')
@@ -147,7 +177,7 @@ export class AdjustComponent implements OnInit {
 
         this.bookService.updateBook(this.bookId, updatedBook).subscribe({
             next: () => {
-                this.successMessage = `Buch ${this.bookId} wurde erfolgreich aktualisiert.`;
+                this.successMessage = `Book ${this.bookId} updated successfully.`;
                 this.errorMessage = null;
 
                 setTimeout(() => {
@@ -155,13 +185,17 @@ export class AdjustComponent implements OnInit {
                 }, 1500);
             },
             error: (err) => {
-                this.errorMessage = 'Fehler beim Aktualisieren des Buchs.';
+                this.errorMessage = 'Error updating the book.';
                 this.successMessage = null;
                 console.error(err);
             },
         });
     }
 
+    /**
+     * Loads a book by ID directly (e.g., from route state) and populates the form.
+     * @param id - ID of the book to load
+     */
     loadBookById(id: number) {
         this.bookService.getBookById(id).subscribe({
             next: (book) => {
@@ -171,7 +205,7 @@ export class AdjustComponent implements OnInit {
                 this.errorMessage = null;
             },
             error: () => {
-                this.errorMessage = 'Buch konnte nicht geladen werden.';
+                this.errorMessage = 'Book could not be loaded.';
                 setTimeout(() => this.router.navigate(['/list']), 2000);
             },
         });
