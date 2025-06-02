@@ -28,11 +28,7 @@ jobs:
           npm install --no-save cypress start-server-and-test
 
       - name: Build Angular Project
-        run: npm run build
+        run: npm run build #
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm start
-          wait-on: http://localhost:4200
-          wait-on-timeout: 60
+      - name: Run E2E Tests
+        run: npx start-server-and-test "npm run start" http://localhost:4200 "npm run e2e"
