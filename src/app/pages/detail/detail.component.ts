@@ -47,7 +47,7 @@ export class DetailComponent implements OnInit {
     ngOnInit(): void {
         const idParam = this.route.snapshot.paramMap.get('id');
         const id = idParam ? +idParam : null;
-
+        this.isAdmin = this.authService.hasRole('admin');
         if (id === null || isNaN(id)) {
             this.error = 'Ungültige Buch-ID.';
             this.isLoading = false;
