@@ -25,10 +25,10 @@ jobs:
         run: npm start &
       
       - name: Wait for Angular server to be ready
-        uses: jakejarvis/wait-action@v0.1.2
+        uses: softprops/wait-for@v1
         with:
           url: 'http://localhost:4200'
-          timeout: 60
+          timeout: '60'
 
       - name: Run Cypress tests
         run: npm run cypress:run
