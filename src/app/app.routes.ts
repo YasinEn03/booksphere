@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ChartComponent } from './chart/chart.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/list/list.component';
@@ -20,6 +21,7 @@ export const routes: Routes = [
     { path: 'create', component: CreateComponent, canActivate: [AdminGuard] },
     { path: 'detail/:id', component: DetailComponent },
     { path: 'list', component: ListComponent },
+    { path: 'charts', component: ChartComponent },
     { path: 'user', component: UserComponent, canActivate: [LoginGuard] },
     { path: 'access-denied', component: AccessDeniedComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },

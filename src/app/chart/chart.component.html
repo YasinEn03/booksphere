@@ -1,0 +1,62 @@
+<!-- Introbereich -->
+<div *ngIf="!showChart" class="chart-intro fade-in-center">
+  <h2 class="intro-title">📈 Wählen Sie eines der genannten Charts aus</h2>
+  <div class="chart-button-group">
+    <button mat-raised-button color="primary" (click)="selectChartType('pie')">🥧 Pie Chart</button>
+    <button mat-raised-button color="accent" (click)="selectChartType('bar')">📊 Bar Chart</button>
+    <button mat-raised-button color="warn" (click)="selectChartType('doughnut')">🍩 Doughnut Chart</button>
+  </div>
+</div>
+
+<!-- Auswahlbox für Diagrammtyp -->
+<div *ngIf="showChart" class="material-select-box fade-in-pop">
+  <h2>Wählen Sie einen Diagrammtyp</h2>
+  <div class="custom-dropdown">
+    <select [(ngModel)]="chartType" (change)="onChartTypeSelect()">
+      <option value="pie">🥧 Pie</option>
+      <option value="bar">📊 Bar</option>
+      <option value="doughnut">🍩 Doughnut</option>
+    </select>
+  </div>
+</div>
+
+<!-- Charts & Statistiken -->
+<section *ngIf="showChart" class="fade-in">
+
+  <div class="chart-row">
+    <!-- Chart: Bücher nach Art -->
+    <div class="chart-section">
+      <h3>📘 Bücher nach Art</h3>
+      <div class="chart-container">
+        <canvas baseChart [data]="chartArtData" [type]="chartType" [options]="chartOptions"></canvas>
+      </div>
+    </div>
+
+    <!-- Chart: Bücher nach Schlagwort -->
+    <div class="chart-section">
+      <h3>🏷️ Bücher nach Schlagwort</h3>
+      <div class="chart-container">
+        <canvas baseChart [data]="chartSchlagwortData" [type]="chartType" [options]="chartOptions"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistiken -->
+  <div class="stat-summary">
+    <mat-card class="stat-card bounce-in">
+      <mat-card-title>📚 Gesamtanzahl</mat-card-title>
+      <mat-card-content>{{ totalBooks }} Bücher</mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card bounce-in">
+      <mat-card-title>⭐ Beliebtester Typ</mat-card-title>
+      <mat-card-content>{{ mostArtCommonType }}</mat-card-content>
+      <mat-card-content>{{ mostSchlagwortCommonType }}</mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card bounce-in">
+      <mat-card-title>📈 Durchschnittlicher Preis</mat-card-title>
+      <mat-card-content>{{ avgPrice | currency: 'EUR' }}</mat-card-content>
+    </mat-card>
+  </div>
+</section>

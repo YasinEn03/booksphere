@@ -22,6 +22,7 @@
       </button>
       <button mat-menu-item [routerLink]="'/search'">Suche</button>
       <button mat-menu-item [routerLink]="'/list'">Bücherliste</button>
+      <button mat-menu-item [routerLink]="'/charts'">Charts</button>
       <button mat-menu-item [routerLink]="'/adjust'" *ngIf="this.authService.hasRole('admin')">
         Anpassen
       </button>
