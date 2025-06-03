@@ -1,6 +1,6 @@
 describe('ChartComponent E2E', () => {
     beforeEach(() => {
-        cy.visit('/chart');
+        cy.visit('/charts');
     });
 
     it('zeigt Introbereich mit Chart Buttons', () => {
