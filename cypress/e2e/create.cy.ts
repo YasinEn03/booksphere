@@ -20,7 +20,7 @@ describe('Create Book', () => {
 
         cy.get('input[name="schlagwoerter"]').clear().type('JAVA, TYPESCRIPT');
 
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').contains('Buch erstellen').click();
 
         cy.url().should('include', '/list');
         cy.get('button').contains('2').click();
