@@ -2,17 +2,25 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { timeout } from 'rxjs';
 import { Book, BookService } from '../../rest/book-service';
 import { AuthService } from '../../security/auth/auth.service';
 import { BookTransferService } from '../../service/book.transfer-service';
+import { DownloadService } from '../../service/download-service';
 import { FilterService } from '../../service/filter-service';
 
 @Component({
     selector: 'app-detail',
-    imports: [CommonModule, MatCardModule, MatChipsModule, MatProgressSpinner],
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatChipsModule,
+        MatProgressSpinner,
+        MatIconModule,
+    ],
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
 })
@@ -38,6 +46,7 @@ export class DetailComponent implements OnInit {
         private router: Router,
         private bookTransferService: BookTransferService,
         private authService: AuthService,
+        public downloadService: DownloadService,
     ) {}
 
     /**
@@ -102,5 +111,17 @@ export class DetailComponent implements OnInit {
         }
         this.bookTransferService.setBook(this.book);
         this.router.navigate(['/adjust'], { state: { bookId: this.book.id } });
+    }
+
+    downloadTxt(): void {
+        if (this.book) {
+            this.downloadService.downloadTxt(this.book);
+        }
+    }
+
+    downloadPdf(): void {
+        if (this.book) {
+            this.downloadService.downloadAsPdf(this.book);
+        }
     }
 }
