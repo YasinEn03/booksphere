@@ -39,3 +39,6 @@ Thumbs.db
 
 # Security
 /tls/*
+
+#Cypress downloads
+/cypress/downloads
