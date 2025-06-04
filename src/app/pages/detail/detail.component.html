@@ -48,6 +48,15 @@
       <small>Erzeugt: {{ book.erzeugt | date:'short' }}</small><br />
       <small>Aktualisiert: {{ book.aktualisiert | date:'short' }}</small>
     </mat-card-footer>
+    <div class="download-actions">
+      <button (click)="downloadService.downloadAsPdf(book!)">
+        <mat-icon>picture_as_pdf</mat-icon> PDF herunterladen
+      </button>
+      <button (click)="downloadService.downloadTxt(book!)">
+        <mat-icon>description</mat-icon> TXT herunterladen
+      </button>
+    </div>
+
     <div *ngIf="isAdmin" class="admin-actions">
       <button (click)="onDeleteClick()"> Löschen</button>
       <button (click)="onUpdateClick()"> Bearbeiten</button>
