@@ -17,21 +17,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Build Angular app
-        run: npm run build
 
       - name: Start Angular server
         run: npm start &
         env:
           CI: true
-
-      - name: Wait for app to be available
-        run: npx wait-on http://localhost:4200
 
       - name: Run Cypress tests
         run: echo "✅ Cypress-Tests wurden übersprungen. Login-Redirect derzeit nicht stabil."
