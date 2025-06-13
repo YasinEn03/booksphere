@@ -2,8 +2,8 @@
 .list-container {
   max-width: 900px;
   margin: 2rem auto;
-  padding: 2rem 2rem 180px 2rem;
-  background: linear-gradient(135deg, #e0f7fa, #ffffff); // weicher Verlauf
+  padding: 1rem 1rem 50px 2rem;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
   border-radius: 1rem;
   box-shadow: 0 6px 20px rgba(0, 188, 212, 0.15);
 
@@ -29,11 +29,7 @@
       gap: 0.3rem;
       font-family:
         'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      background: linear-gradient(
-        to right,
-        #b2ebf2,
-        #e0f7fa
-      ); // sanfter Verlauf
+      background: linear-gradient(to right, #b2ebf2, #e0f7fa);
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
       cursor: pointer;
