@@ -1,24 +1,29 @@
+$primary: #00796b;
+$dark-primary: #004d40;
+$light-primary: #80cbc4;
+$error: #d32f2f;
+$text: #00332f;
+
 .adjust-container {
   max-width: 900px;
   margin: 5rem auto;
-  padding: 2rem;
-  padding-bottom: 150px;
+  padding: 2rem 2rem 150px;
   background: linear-gradient(135deg, #e0f2f1, #b2dfdb);
   border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 150, 136, 0.2);
+  box-shadow: 0 8px 20px rgba($primary, 0.2);
   transition: box-shadow 0.3s ease;
 
   &:hover {
-    box-shadow: 0 12px 30px rgba(0, 150, 136, 0.35);
+    box-shadow: 0 12px 30px rgba($primary, 0.35);
   }
 
   h2 {
     margin-bottom: 2rem;
     text-align: center;
-    color: #004d40;
+    color: $dark-primary;
     font-weight: 700;
     font-size: 2rem;
-    text-shadow: 1px 1px 3px rgba(0, 77, 64, 0.3);
+    text-shadow: 1px 1px 3px rgba($dark-primary, 0.3);
   }
 
   form {
@@ -35,87 +40,82 @@
     width: 100%;
 
     .mat-form-field-outline {
-      border-color: #80cbc4 !important;
+      border-color: $light-primary !important;
     }
 
     &.mat-focused .mat-form-field-outline {
-      border-color: #00796b !important;
-      box-shadow: 0 0 8px rgba(0, 121, 107, 0.5);
+      border-color: $primary !important;
+      box-shadow: 0 0 8px rgba($primary, 0.5);
     }
 
     .mat-form-field-label {
-      color: #00695c !important;
+      color: darken($primary, 10%) !important;
       font-weight: 600;
     }
 
     &.mat-focused .mat-form-field-label {
-      color: #004d40 !important;
+      color: $dark-primary !important;
     }
 
     .mat-input-element {
-      color: #00332f !important;
-      background-color: #ffffff;
+      color: $text !important;
+      background-color: #fff;
     }
 
     &.mat-form-field-invalid {
-      .mat-form-field-outline {
-        border-color: #d32f2f !important;
-      }
-
+      .mat-form-field-outline,
       .mat-form-field-label {
-        color: #d32f2f !important;
+        color: $error !important;
+        border-color: $error !important;
       }
     }
   }
 
   mat-select {
-    color: #00332f !important;
+    color: $text !important;
 
     &.mat-focused .mat-select-trigger {
-      color: #004d40 !important;
+      color: $dark-primary !important;
     }
   }
 
   mat-checkbox {
-    color: #00796b;
+    color: $primary;
 
     .mat-checkbox-frame {
-      border-color: #00796b;
+      border-color: $primary;
     }
 
-    &.mat-accent .mat-checkbox-checked .mat-checkbox-background {
-      background-color: #00796b !important;
-    }
-
+    &.mat-accent .mat-checkbox-checked .mat-checkbox-background,
     &.mat-checkbox-checked .mat-checkbox-background {
-      background-color: #00796b !important;
+      background-color: $primary !important;
     }
 
     .mat-checkbox-label {
-      color: #00332f;
+      color: $text;
       font-weight: 600;
     }
   }
 
   .error {
     grid-column: span 2;
-    color: #d32f2f;
+    color: $error;
     margin-top: 1rem;
     font-weight: 700;
-    text-shadow: 0 0 3px rgba(211, 47, 47, 0.5);
+    text-shadow: 0 0 3px rgba($error, 0.5);
   }
 
   button {
     padding: 0.75rem 1.5rem;
     border: none;
-    background: linear-gradient(135deg, #00796b, #004d40);
-    color: white;
+    background: linear-gradient(135deg, $primary, $dark-primary);
+    color: #fff;
     border-radius: 0.5rem;
     cursor: pointer;
     grid-column: span 2;
     justify-self: center;
     font-weight: 700;
-    box-shadow: 0 6px 15px rgba(0, 121, 107, 0.5);
+    box-shadow: 0 6px 15px rgba($primary, 0.5);
     transition:
       background 0.3s ease,
       box-shadow 0.3s ease,
@@ -128,7 +128,7 @@
     }
 
     &:hover:not(:disabled) {
-      background: linear-gradient(135deg, #004d40, #002a22);
+      background: linear-gradient(135deg, $dark-primary, #002a22);
       box-shadow: 0 10px 25px rgba(0, 75, 64, 0.7);
       transform: scale(1.05);
     }
@@ -148,15 +148,15 @@
     border-radius: 0.5rem;
     cursor: pointer;
     font-weight: 600;
-    box-shadow: 0 4px 10px rgba(0, 150, 136, 0.4);
+    box-shadow: 0 4px 10px rgba(#009688, 0.4);
     transition:
       background 0.3s ease,
       box-shadow 0.3s ease,
       transform 0.15s ease;
 
     &:hover {
-      background: linear-gradient(135deg, #00796b, #004d40);
-      box-shadow: 0 7px 20px rgba(0, 121, 107, 0.6);
+      background: linear-gradient(135deg, $primary, $dark-primary);
+      box-shadow: 0 7px 20px rgba($primary, 0.6);
       transform: scale(1.05);
     }
   }
@@ -178,7 +178,7 @@
       grid-template-columns: 1fr;
     }
 
-    form .full-width {
+    .full-width {
       grid-column: span 1;
     }
 

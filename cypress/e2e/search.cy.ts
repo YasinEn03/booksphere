@@ -33,7 +33,7 @@ describe('HomeComponent', () => {
         cy.contains('Buch-ID:').should('not.exist');
         cy.get('.error').should(
             'contain.text',
-            'Buch mit dieser ID nicht gefunden',
+            'Buch mit dieser ID konnte nicht gefunden werden',
         );
     });
 
@@ -47,7 +47,7 @@ describe('HomeComponent', () => {
         cy.contains('ISBN:').should('not.exist');
         cy.get('.error').should(
             'contain.text',
-            'Buch mit dieser ISBN nicht gefunden',
+            'Buch mit dieser ISBN konnte nicht gefunden werden',
         );
     });
 
@@ -59,7 +59,10 @@ describe('HomeComponent', () => {
         cy.contains('button', 'Suche nach ID').click();
 
         cy.contains('Buch-ID:').should('not.exist');
-        cy.get('.error').should('contain.text', 'Bitte eine Buch-ID eingeben');
+        cy.get('.error').should(
+            'contain.text',
+            'Bitte geben Sie eine Buch-ID ein',
+        );
     });
 
     it('should show error if there is no isbn', () => {
@@ -70,6 +73,9 @@ describe('HomeComponent', () => {
         cy.contains('button', 'Suche nach ISBN').click();
 
         cy.contains('ISBN:').should('not.exist');
-        cy.get('.error').should('contain.text', 'Bitte eine ISBN eingeben');
+        cy.get('.error').should(
+            'contain.text',
+            'Bitte geben Sie eine ISBN ein',
+        );
     });
 });

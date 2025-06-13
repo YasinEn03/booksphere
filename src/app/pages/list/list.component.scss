@@ -1,4 +1,21 @@
-/* ------------------------------ Container & Layout ------------------------------ */
+@mixin button-style($from, $to, $hover-from, $hover-to) {
+  padding: 0 1rem;
+  font-weight: 600;
+  background: linear-gradient(to right, $from, $to);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3);
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(to right, $hover-from, $hover-to);
+    transform: scale(1.07);
+    box-shadow: 0 6px 15px rgba(0, 150, 136, 0.5);
+  }
+}
+
 .list-container {
   max-width: 900px;
   margin: 2rem auto;
@@ -7,16 +24,14 @@
   border-radius: 1rem;
   box-shadow: 0 6px 20px rgba(0, 188, 212, 0.15);
 
-  /* ------------------------------ Section Title ------------------------------ */
   h2 {
     margin-bottom: 2rem;
     text-align: center;
-    color: #007c91; // einheitlich mit welcome-header
+    color: #007c91;
     font-size: 1.6rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
-  /* ------------------------------ Filter Section ------------------------------ */
   .filter-section {
     display: flex;
     gap: 1rem;
@@ -49,32 +64,17 @@
     }
 
     button {
-      padding: 0 1rem;
-      font-weight: 600;
-      background: linear-gradient(to right, #00bcd4, #0097a7);
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3);
-      border: none;
-
-      &:hover {
-        background: linear-gradient(to right, #0097a7, #006064);
-        transform: scale(1.07);
-        box-shadow: 0 6px 15px rgba(0, 150, 136, 0.5);
-      }
+      @include button-style(#00bcd4, #0097a7, #0097a7, #006064);
     }
   }
 
-  /* ------------------------------ Book List Grid ------------------------------ */
   .book-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
-    margin: 0;
     gap: 1rem;
+    margin: 0;
   }
 
-  /* ------------------------------ Individual Book Card ------------------------------ */
   .book-card {
     background: linear-gradient(135deg, #ffffff, #e0f7fa);
     border-left: 6px solid #00bcd4;
@@ -88,6 +88,11 @@
       transform 0.3s ease,
       box-shadow 0.3s ease;
 
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 188, 212, 0.2);
+    }
+
     .book-title {
       font-weight: bold;
       font-size: 1.2rem;
@@ -97,11 +102,6 @@
     .book-subtitle {
       font-size: 1rem;
       color: #555;
-    }
-
-    &:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(0, 188, 212, 0.2);
     }
 
     .rating-stars {
@@ -114,7 +114,6 @@
     }
   }
 
-  /* ------------------------------ Pagination Controls ------------------------------ */
   .pagination {
     display: flex;
     gap: 0.5rem;
@@ -123,19 +122,17 @@
     margin-top: 1rem;
 
     button {
+      @include button-style(#ffffff, #ffffff, #e0f7fa, #e0f7fa);
+      color: #006064;
+      border: 1px solid #00bcd4;
+      background: white;
+      border-radius: 4px;
       max-height: 30px;
       padding: 0.5rem 1rem;
-      border: 1px solid #00bcd4;
-      color: #006064;
-      background-color: white;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.3s ease;
 
       &:hover {
-        background: #e0f7fa;
-        transform: scale(1.05);
         box-shadow: 0 2px 8px rgba(0, 188, 212, 0.2);
+        transform: scale(1.05);
       }
 
       &:disabled {
@@ -147,22 +144,22 @@
       }
     }
   }
+}
 
-  /* ------------------------------ Responsive Design ------------------------------ */
-  @media (max-width: 768px) {
-    .list-container {
-      margin: 4rem 1rem;
-      padding-bottom: 140px;
+/* ------------------------------ Media Queries ------------------------------ */
+@media (max-width: 768px) {
+  .list-container {
+    margin: 4rem 1rem;
+    padding-bottom: 140px;
 
-      .book-list {
-        grid-template-columns: 1fr;
-      }
+    .book-list {
+      grid-template-columns: 1fr;
     }
   }
+}
 
-  @media (max-width: 1024px) {
-    .book-list {
-      grid-template-columns: repeat(2, 1fr);
-    }
+@media (max-width: 1024px) {
+  .book-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

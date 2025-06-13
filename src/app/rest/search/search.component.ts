@@ -93,13 +93,15 @@ export class SearchComponent implements OnInit {
     searchById() {
         this.resetResult();
         if (!this.bookId) {
-            this.error = 'Bitte eine Buch-ID eingeben';
+            this.error = 'Bitte geben Sie eine Buch-ID ein';
             return;
         }
 
         this.bookService.getBookById(this.bookId).subscribe({
             next: (b) => (this.book = b),
-            error: () => (this.error = 'Buch mit dieser ID nicht gefunden'),
+            error: () =>
+                (this.error =
+                    'Buch mit dieser ID konnte nicht gefunden werden.'),
         });
     }
 
@@ -109,14 +111,15 @@ export class SearchComponent implements OnInit {
     searchByIsbn() {
         this.resetResult();
         if (!this.isbn.trim()) {
-            this.error = 'Bitte eine ISBN eingeben';
+            this.error = 'Bitte geben Si eine ISBN ein';
             return;
         }
 
         this.bookService.getBookByIsbn(this.isbn).subscribe({
             next: (b) => {
                 if (!b) {
-                    this.error = 'Buch mit dieser ISBN nicht gefunden';
+                    this.error =
+                        'Buch mit dieser ISBN konnte nicht gefunden werden.';
                     return;
                 } else {
                     this.book = b;
