@@ -1,7 +1,8 @@
 {
   "extends": "../tsconfig.json",
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "../cypress.config.ts"
   ],
   "compilerOptions": {
     "sourceMap": false,
@@ -10,7 +11,7 @@
     ]
   },
   "e2e": {
-    "baseUrl": "https:localhost:4200",
+    "baseUrl": "https://localhost:4200",
     "chromeWebSecurity": false,
   }
 }
