@@ -47,3 +47,19 @@ app-root {
     background-color: color.adjust($primary-color, $lightness: -10%);
   }
 }
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated-element {
+  opacity: 0;
+  animation: slideInUp 0.8s ease-out forwards;
+}

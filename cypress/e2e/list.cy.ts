@@ -54,7 +54,9 @@ describe('Book List Page', () => {
 
     it('should prevent normal user from editing and deleting books', () => {
         cy.visit('/home');
-        cy.contains('button', 'Logout').click();
+        cy.get('button[mat-icon-button]')
+            .contains('logout', { matchCase: false })
+            .click();
 
         cy.contains('a', 'Login').click();
         cy.url().should('include', '/login');
@@ -76,6 +78,8 @@ describe('Book List Page', () => {
 
         cy.visit('/home');
 
-        cy.contains('button', 'Logout').click();
+        cy.get('button[mat-icon-button]')
+            .contains('logout', { matchCase: false })
+            .click();
     });
 });

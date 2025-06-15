@@ -1,21 +1,20 @@
 <section class="welcome-section">
   <!-- Welcome banner -->
-  <div class="welcome-header">
+  <div class="welcome-header animated-element" style="animation-delay: 0.2s">
     <h1>
       <img src="/booksphereLogo.png" alt="Icon"
         style="width: 90px; height: 120px; vertical-align: middle; margin-right: 8px;">
       Willkommen bei <strong class="highlight">BookSphere</strong>
     </h1>
-
   </div>
-  <p class="welcome-text">
-    Entdecken auch Sie eine Welt voller Bücher. Finden, teilen und lieben Sie Literatur – alles
-    an einem Ort.
+
+  <p class="welcome-text animated-element" style="animation-delay: 0.6s">
+    Entdecken auch Sie eine Welt voller Bücher. Finden, teilen und lieben Sie Literatur – alles an einem Ort.
   </p>
 </section>
 
-<!-- Shows avalible books on the screen -->
-<mat-card class="stat-card">
+<!-- Shows available books on the screen -->
+<mat-card class="stat-card animated-element" style="animation-delay: 1s">
   <mat-card-title>
     <mat-icon style="font-size: auto; color: #009688;">menu_book</mat-icon>
     Es erwarten Sie<strong>{{ bookCount }}</strong>Bücher
@@ -30,13 +29,14 @@
   </button>
 </mat-card>
 
-<!-- Search Form -->
+<!-- Search Form & Categories -->
 <div class="features">
-  <mat-card class="feature">
+  <mat-card class="feature animated-element" style="animation-delay: 1.4s">
     <mat-icon class="feature-icon" color="primary">search</mat-icon>
     <mat-card-title style="margin-top: 15px">Intelligente Suche</mat-card-title>
 
     <mat-form-field appearance="outline" style="margin-top: 15px; width: 100%">
+      <mat-icon matPrefix>search</mat-icon>
       <input matInput placeholder="ISBN eingeben" (keyup.enter)="onSearchClick()" [(ngModel)]="searchInput"
         name="searchInput" />
     </mat-form-field>
@@ -45,9 +45,7 @@
       Suchen
     </button>
 
-    <p *ngIf="warningMessage" style="color: red; margin-top: 10px;">
-      {{ warningMessage }}
-    </p>
+    <p *ngIf="warningMessage" class="warning">{{ warningMessage }}</p>
 
     <p style="margin-top: 15px;">
       Finde Bücher nach <strong>ID</strong>, <strong>ISBN</strong>, <strong>Titel</strong> oder
@@ -55,24 +53,21 @@
     </p>
   </mat-card>
 
-  <!-- Categories -->
-  <mat-card class="feature">
+  <mat-card class="feature animated-element" style="animation-delay: 1.8s">
     <mat-icon class="feature-icon" color="primary">category</mat-icon>
-    <mat-card-title style="margin-top: 15px; font-style: bold">
-      Kategorien entdecken
-    </mat-card-title>
+    <mat-card-title style="margin-top: 15px; font-style: bold">Kategorien entdecken</mat-card-title>
     <div class="category-list">
       <button (click)="onKeywordClick('JAVA')" color="primary">JAVA</button>
       <button (click)="onKeywordClick('JAVASCRIPT')" color="primary">JAVASCRIPT</button>
       <button (click)="onKeywordClick('PHYTON')" color="primary">PHYTON</button>
       <button (click)="onKeywordClick('TYPESCRIPT')" color="primary">TYPESCRIPT</button>
-      <p> Drücken Sie eines dieser Buttons, um nach eins der hier gelisteten Kategorien zu suchen.</p>
+      <p>Drücken Sie eines dieser Buttons, um nach eins der hier gelisteten Kategorien zu suchen.</p>
     </div>
   </mat-card>
 </div>
 
 <!-- Testimonial -->
-<mat-card class="testimonial-card">
+<mat-card class="testimonial-card animated-element" style="animation-delay: 2.4s">
   <blockquote>
     <p style="color: black">
       <em>"Dank BookSphere habe ich meine Leseliebe wiederentdeckt!"</em>

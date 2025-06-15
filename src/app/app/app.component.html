@@ -1,54 +1,76 @@
 <div class="page-container">
 
   <!-- Toolbar -->
-  <mat-toolbar color="primary" class="toolbar">
-    <img src="/booksphereLogo.png" alt="Icon" style="width: 60px; height: 80px; vertical-align: middle">
-    <span style="margin-left: 8px">BookSphere</span>
-    <span class="spacer"></span>
-    <a mat-button routerLink="/home">Home</a>
-    <ng-template #loginLink>
-      <a mat-button routerLink="/login">Login</a>
-    </ng-template>
-    <ng-container *ngIf="isLoggedIn; else loginLink">
-      <button mat-button (click)="logout()">Logout</button>
-      <a mat-button routerLink="/user">{{ username }}</a>
-    </ng-container>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="'/home'" *ngIf="router.url !== '/home'">
-        Home
+  <mat-toolbar class="toolbar toolbar">
+    <div class="toolbar-left">
+      <img src="/booksphereLogo.png" alt="BookSphere Logo" class="logo" />
+      <span class="brand-name">BookSphere</span>
+    </div>
+
+    <div class="toolbar-center">
+      <a mat-button routerLink="/home" routerLinkActive="active-link">Home</a>
+      <a mat-button routerLink="/search">Suche</a>
+      <a mat-button routerLink="/list">Bücherliste</a>
+      <a mat-button routerLink="/charts">Charts</a>
+      <a mat-button *ngIf="authService.hasRole('admin')" routerLink="/adjust">Anpassen</a>
+      <a mat-button *ngIf="authService.hasRole('admin')" routerLink="/create">Hinzufügen</a>
+    </div>
+
+    <div class="toolbar-right">
+      <ng-template #loginLink>
+        <a mat-stroked-button color="accent" routerLink="/login">Login</a>
+      </ng-template>
+      <ng-container *ngIf="isLoggedIn; else loginLink">
+        <a mat-stroked-button color="accent" routerLink="/user">{{ username }}</a>
+        <button mat-icon-button (click)="logout()" matTooltip="Logout">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </ng-container>
+
+      <button mat-icon-button [matMenuTriggerFor]="notificationsMenu" matTooltip="Benachrichtigungen">
+        <mat-icon>notifications</mat-icon>
       </button>
-      <button mat-menu-item [routerLink]="'/search'">Suche</button>
-      <button mat-menu-item [routerLink]="'/list'">Bücherliste</button>
-      <button mat-menu-item [routerLink]="'/charts'">Charts</button>
-      <button mat-menu-item [routerLink]="'/adjust'" *ngIf="this.authService.hasRole('admin')">
-        Anpassen
-      </button>
-      <button mat-menu-item [routerLink]="'/create'" *ngIf="this.authService.hasRole('admin')"> Hinzufügen </button>
-    </mat-menu>
+
+      <mat-menu #notificationsMenu="matMenu">
+        <ng-container *ngIf="notifications.length > 0; else noNotifications">
+          <div *ngFor="let notification of notifications">
+            <button mat-menu-item (click)="goToLink(notification)">
+              <mat-icon color="accent" style="margin-right: 8px">
+                {{ notification.read ? 'notifications' : 'notification_important' }}
+              </mat-icon>
+              <span [ngStyle]="{ 'font-weight': notification.read ? 'normal' : 'bold' }">
+                {{ notification.message }}
+              </span>
+              <span class="spacer"></span>
+              <button mat-icon-button color="warn" (click)="deleteNotification(notification); $event.stopPropagation();"
+                matTooltip="Löschen">
+                <mat-icon>close</mat-icon>
+              </button>
+            </button>
+          </div>
+        </ng-container>
+        <ng-template #noNotifications>
+          <button mat-menu-item disabled>Keine neuen Benachrichtigungen</button>
+        </ng-template>
+      </mat-menu>
+    </div>
   </mat-toolbar>
 
-  <!-- Content under the toolbar -->
-
+  <!-- Content -->
   <div class="content-wrapper">
     <router-outlet></router-outlet>
   </div>
 
   <!-- Footer -->
-  <footer style="
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-family:
-      'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-      'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  " class="footer">
+  <footer class="footer">
     <div class="footer-content">
-      <p>📚 BookSphere – Dein digitales Bücherregal</p>
-      <a href="/impressum">Impressum</a> |
-      <a href="https://www.youtube.com">Youtube</a> |
-      <a href="https://linkedin.com">LinkedIn</a>
+      <p>📚 <strong>BookSphere</strong> – Dein digitales Bücherregal</p>
+      <div class="footer-links">
+        <a href="/impressum">Impressum</a>
+        <a href="https://www.youtube.com" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
   </footer>
+
 </div>

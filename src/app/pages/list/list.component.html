@@ -1,8 +1,8 @@
 <div class="list-container">
-  <h2>Bücherliste</h2>
+  <h2 class="animated-element" style="animation-delay: 0.2s;">Bücherliste</h2>
 
   <!-- Checkbox filter -->
-  <div class="filter-section">
+  <div class="filter-section animated-element" style="animation-delay: 0.4s;">
     <label>
       <input type="checkbox" [(ngModel)]="filterLanguages.JAVA" (change)="applyFilter()" />
       JAVA
@@ -26,8 +26,9 @@
 
   <!-- Displays books equivalent to filter -->
   <div class="book-list">
-    <mat-card class="book-card" *ngFor="let book of paginatedBooks" (click)="goToDetails(book.id)" tabindex="0"
-      role="button" [attr.aria-label]="'Details zu ' + book.titel.titel">
+    <mat-card class="book-card animated-element" *ngFor="let book of paginatedBooks; let i = index"
+      [style.animation-delay]="(0.5 + i * 0.1) + 's'" (click)="goToDetails(book.id)" tabindex="0" role="button"
+      [attr.aria-label]="'Details zu ' + book.titel.titel">
       <mat-card-header>
         <mat-card-title class="book-title">{{ book.titel.titel }}</mat-card-title>
         <mat-card-subtitle *ngIf="book.titel.untertitel" class="book-subtitle">
@@ -49,7 +50,7 @@
   </div>
 
   <!-- Paginator -->
-  <div class="pagination" *ngIf="totalPages > 1">
+  <div class="pagination animated-element" style="animation-delay: 1.5s;" *ngIf=" totalPages> 1">
     <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="setPage(i + 1)"
       [disabled]="currentPage === i + 1">
       {{ i + 1 }}

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../security/auth/auth.service';
+import {
+    Notification,
+    NotificationService,
+} from '../service/notification-service';
 
 @Component({
     selector: 'app-root',
@@ -27,15 +31,18 @@ import { AuthService } from '../security/auth/auth.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     isLoggedIn = false;
     username: string | null = null;
     title = 'booksphere';
+    notifications: Notification[] = [];
     private authSub: Subscription | undefined;
+    private notificationSub: Subscription | undefined;
 
     constructor(
         public router: Router,
         public authService: AuthService,
+        private notificationService: NotificationService,
     ) {}
 
     ngOnInit(): void {
@@ -47,8 +54,34 @@ export class AppComponent implements OnInit {
                 localStorage.removeItem('roles');
                 localStorage.removeItem('username');
             }
+
             this.username = status ? this.authService.getUsername() : null;
         });
+
+        this.notificationSub =
+            this.notificationService.notifications$.subscribe(
+                (notifications) => {
+                    this.notifications = notifications;
+                },
+            );
+    }
+
+    goToLink(notification: Notification): void {
+        const index = this.notifications.indexOf(notification);
+        if (notification.link) {
+            window.open(notification.link, '_blank');
+        }
+        this.notificationService.markAsRead(index);
+    }
+
+    deleteNotification(notification: Notification) {
+        const index = this.notifications.indexOf(notification);
+        this.notificationService.deleteNotification(index);
+    }
+
+    ngOnDestroy(): void {
+        if (this.authSub) this.authSub.unsubscribe();
+        if (this.notificationSub) this.notificationSub.unsubscribe();
     }
 
     logout(): void {

@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { BookTransferService } from '../../service/book.transfer-service';
+import { NotificationService } from '../../service/notification-service';
 import { Book, BookService } from '../book-service';
 
 @Component({
@@ -51,6 +52,7 @@ export class AdjustComponent implements OnInit {
         private router: Router,
         private bookService: BookService,
         private bookTransferService: BookTransferService,
+        private notificationService: NotificationService,
     ) {}
 
     /**
@@ -178,6 +180,12 @@ export class AdjustComponent implements OnInit {
         this.bookService.updateBook(this.bookId, updatedBook).subscribe({
             next: () => {
                 this.successMessage = `Book ${this.bookId} updated successfully.`;
+
+                this.notificationService.addNotification({
+                    message: `Buch aktualisiert: ${this.book.titel.titel}`,
+                    link: `/detail/${this.bookId}`,
+                });
+
                 this.errorMessage = null;
 
                 setTimeout(() => {

@@ -1,7 +1,9 @@
 <div class="search-container">
-  <h2>Buchsuche</h2>
-  <!-- Search Form ID & ISBN -->
-  <form class="search-form" (submit)="false">
+  <h2 class="animated-element" style="animation-delay: 0.2s;">Buchsuche</h2>
+
+  <!-- Search form -->
+  <form class="search-form animated-element" style="animation-delay: 0.4s;" (submit)="false">
+    <!-- Buch-ID Suche -->
     <div class="search-row">
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>Buch-ID</mat-label>
@@ -13,6 +15,7 @@
       </button>
     </div>
 
+    <!-- ISBN Suche -->
     <div class="search-row">
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>ISBN</mat-label>
@@ -25,31 +28,34 @@
     </div>
   </form>
 
-  <!-- Errormsg. if request does not responds with a book anything-->
   <p class="error" *ngIf="error">{{ error }}</p>
 
-  <!-- Response as a card containing some informations about the resulting book -->
-  <div class="card" *ngIf="book">
+  <!-- Einzelnes Ergebnis -->
+  <div class="card animated-element" *ngIf="book">
     <h3>Buch-ID: {{ book.id }}</h3>
     <p><strong>ISBN:</strong> {{ book.isbn }}</p>
     <p><strong>Titel:</strong> {{ book.titel.titel }}</p>
     <p><strong>Untertitel:</strong> {{ book.titel.untertitel }}</p>
     <p><strong>Preis:</strong> {{ book.preis }} €</p>
     <p><strong>Schlagwörter:</strong> {{ book.schlagwoerter.join(', ') }}</p>
-    <button routerLink="/detail/{{ book.id }}" mat-stroked-button color="primary">Details ansehen</button>
+    <button routerLink="/detail/{{ book.id }}" mat-stroked-button color="primary">
+      Details ansehen
+    </button>
   </div>
 
-  <!-- Disabled if redirected from homepage  -->
-  <div *ngIf="disableSearchForm" style="margin-top: 20px;">
+  <!-- Reset-Button -->
+  <div *ngIf="disableSearchForm" class="animated-element" style="animation-delay: 1s; margin-top: 20px;">
     <button mat-stroked-button color="primary" (click)="enableSearchForm()">
       Suche nach anderen Büchern
     </button>
   </div>
 
-  <!-- Results when redirected by homepage to search -->
-  <div class="multi-result" *ngIf="books.length > 0">
+  <!-- Mehrere Ergebnisse -->
+  <div class="multi-result animated-element" style="animation-delay: 1.2s;" *ngIf="books.length > 0">
     <h3>Suchergebnisse ({{ books.length }})</h3>
-    <mat-card *ngFor="let b of books" class="book-card">
+
+    <mat-card *ngFor="let b of books; let i = index" class="book-card animated-element"
+      [style.animation-delay]="(1.3 + i * 0.1) + 's'">
       <mat-card-title>{{ b.titel.titel }}</mat-card-title>
       <mat-card-content>
         <p>ID: {{ b.id }}</p>
