@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     }
 
     onKeywordClick(keyword: string) {
-        this.filterService.setKeywords([keyword.toUpperCase()]);
+        this.filterService.setKeywords([keyword]);
         this.router.navigate(['/list']);
     }
 
