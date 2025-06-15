@@ -23,6 +23,7 @@ jobs:
           wait-on: 'http://localhost:4200' # Waits for above
           # Records to Cypress Cloud 
           # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
+          browser: chrome
           record: true
           parallel: true # Runs test in parallel using settings above
         env:
