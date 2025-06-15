@@ -3,7 +3,7 @@
   margin: 2rem auto;
   padding: 1.5rem;
   border-radius: 12px;
-  background: linear-gradient(135deg, #e0f2f1, #b2dfdb);
+  background: linear-gradient(135deg, #b2ebf2, #e0f7fa); // angepasst
   box-shadow: 0 4px 12px rgba(0, 150, 136, 0.15);
   transition: box-shadow 0.3s ease;
 
@@ -30,9 +30,9 @@
     white-space: nowrap;
     border: none;
     border-radius: 6px;
-    color: white;
+    color: #fff;
     cursor: pointer;
-    background: linear-gradient(135deg, #00796b, #004d40);
+    background: linear-gradient(135deg, #007c91, #004d40); // angepasst
     box-shadow: 0 3px 6px rgba(0, 121, 107, 0.4);
     transition:
       background 0.3s,
@@ -75,7 +75,7 @@
 
   h3 {
     margin-top: 0;
-    color: #004d40;
+    color: #004d40; // angepasst
     font-weight: 700;
   }
 
@@ -85,7 +85,7 @@
   }
 
   a {
-    color: #00796b;
+    color: #007c91; // angepasst
     text-decoration: none;
     font-weight: 600;
     transition:
@@ -112,7 +112,7 @@
     margin-bottom: 1rem;
     padding: 1rem;
     border-radius: 8px;
-    background: #fff;
+    background: #ffffff;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s;
 
@@ -123,7 +123,7 @@
     mat-card-title {
       font-size: 1.2rem;
       font-weight: 700;
-      color: #00695c;
+      color: #007c91;
     }
 
     mat-card-content {
@@ -139,7 +139,7 @@
       padding: 0.4rem 1rem;
       border: none;
       border-radius: 6px;
-      background: linear-gradient(135deg, #00796b, #004d40);
+      background: linear-gradient(135deg, #007c91, #004d40);
       color: white;
       cursor: pointer;
       box-shadow: 0 3px 6px rgba(0, 121, 107, 0.4);

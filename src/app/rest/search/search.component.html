@@ -1,7 +1,9 @@
 <div class="search-container">
   <h2>Buchsuche</h2>
-  <!-- Search Form ID & ISBN -->
+
+  <!-- Search form for book ID and ISBN -->
   <form class="search-form" (submit)="false">
+    <!-- Book ID search -->
     <div class="search-row">
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>Buch-ID</mat-label>
@@ -13,6 +15,7 @@
       </button>
     </div>
 
+    <!-- ISBN search -->
     <div class="search-row">
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>ISBN</mat-label>
@@ -25,10 +28,10 @@
     </div>
   </form>
 
-  <!-- Errormsg. if request does not responds with a book anything-->
+  <!-- Error message if no result -->
   <p class="error" *ngIf="error">{{ error }}</p>
 
-  <!-- Response as a card containing some informations about the resulting book -->
+  <!-- Result card for a single found book -->
   <div class="card" *ngIf="book">
     <h3>Buch-ID: {{ book.id }}</h3>
     <p><strong>ISBN:</strong> {{ book.isbn }}</p>
@@ -36,26 +39,31 @@
     <p><strong>Untertitel:</strong> {{ book.titel.untertitel }}</p>
     <p><strong>Preis:</strong> {{ book.preis }} €</p>
     <p><strong>Schlagwörter:</strong> {{ book.schlagwoerter.join(', ') }}</p>
-    <button routerLink="/detail/{{ book.id }}" mat-stroked-button color="primary">Details ansehen</button>
+    <button routerLink="/detail/{{ book.id }}" mat-stroked-button color="primary">
+      Details ansehen
+    </button>
   </div>
 
-  <!-- Disabled if redirected from homepage  -->
+  <!-- Reset search button when redirected -->
   <div *ngIf="disableSearchForm" style="margin-top: 20px;">
     <button mat-stroked-button color="primary" (click)="enableSearchForm()">
       Suche nach anderen Büchern
     </button>
   </div>
 
-  <!-- Results when redirected by homepage to search -->
+  <!-- Multiple book results when redirected from homepage -->
   <div class="multi-result" *ngIf="books.length > 0">
     <h3>Suchergebnisse ({{ books.length }})</h3>
+
     <mat-card *ngFor="let b of books" class="book-card">
       <mat-card-title>{{ b.titel.titel }}</mat-card-title>
       <mat-card-content>
         <p>ID: {{ b.id }}</p>
         <p>ISBN: {{ b.isbn }}</p>
         <p>Schlagwörter: {{ b.schlagwoerter.join(', ') }}</p>
-        <button mat-stroked-button [routerLink]="['/detail', b.id]">Details</button>
+        <button mat-stroked-button [routerLink]="['/detail', b.id]">
+          Details
+        </button>
       </mat-card-content>
     </mat-card>
   </div>

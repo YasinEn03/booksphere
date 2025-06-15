@@ -58,7 +58,6 @@ export class AppComponent implements OnInit, OnDestroy {
             this.username = status ? this.authService.getUsername() : null;
         });
 
-        // Abonniere den NotificationService, um Benachrichtigungen zu erhalten
         this.notificationSub =
             this.notificationService.notifications$.subscribe(
                 (notifications) => {
@@ -73,10 +72,6 @@ export class AppComponent implements OnInit, OnDestroy {
             window.open(notification.link, '_blank');
         }
         this.notificationService.markAsRead(index);
-
-        // if (notification.link) {
-        //     this.router.navigateByUrl(notification.link);
-        // }
     }
 
     deleteNotification(notification: Notification) {
