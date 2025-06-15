@@ -12,8 +12,6 @@ export default defineConfig({
         },
         specPattern: '**/*.cy.ts',
     },
-});
 
-module.exports = {
-    projectID: 'vn9h9b',
-};
+    projectId: 'vn9h9b',
+});
