@@ -111,7 +111,7 @@ export class SearchComponent implements OnInit {
     searchByIsbn() {
         this.resetResult();
         if (!this.isbn.trim()) {
-            this.error = 'Bitte geben Si eine ISBN ein';
+            this.error = 'Bitte geben Sie eine ISBN ein';
             return;
         }
 
