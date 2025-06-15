@@ -43,9 +43,8 @@ describe('HomeComponent', () => {
         cy.get('input[formControlName="password"]').type('p');
         cy.get('button').contains('Einloggen').click();
         cy.url().should('include', '/');
-        cy.get('button[mat-icon-button]').click();
-        cy.get('button').contains('Anpassen').should('be.visible');
-        cy.get('button').contains('Hinzufügen').should('be.visible');
+        cy.get('a[mat-button]').contains('Anpassen').should('be.visible');
+        cy.get('a[mat-button]').contains('Hinzufügen').should('be.visible');
     });
 
     it('uses admin features after logging in as admin', () => {
@@ -53,11 +52,15 @@ describe('HomeComponent', () => {
         cy.get('input[formControlName="username"]').type('admin');
         cy.get('input[formControlName="password"]').type('p');
         cy.get('button').contains('Einloggen').click();
-        cy.get('button[mat-icon-button]').click();
-        cy.get('button').contains('Anpassen').should('be.visible').click();
+        cy.get('a[mat-button]')
+            .contains('Anpassen')
+            .should('be.visible')
+            .click();
         cy.get('a').contains('Home').click();
-        cy.get('button[mat-icon-button]').click();
-        cy.get('button').contains('Hinzufügen').should('be.visible').click();
+        cy.get('a[mat-button]')
+            .contains('Hinzufügen')
+            .should('be.visible')
+            .click();
     });
 
     it('toolbar shows no admin features after logging in as user', () => {
@@ -66,7 +69,7 @@ describe('HomeComponent', () => {
         cy.get('input[formControlName="password"]').type('p');
         cy.get('button').contains('Einloggen').click();
         cy.get('button[mat-icon-button]').click();
-        cy.contains('button', 'Anpassen').should('not.exist');
-        cy.contains('button', 'Hinzufügen').should('not.exist');
+        cy.contains('a[mat-button]', 'Anpassen').should('not.exist');
+        cy.contains('a[mat-button]', 'Hinzufügen').should('not.exist');
     });
 });

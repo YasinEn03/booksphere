@@ -18,7 +18,9 @@ describe('UserComponent E2E Tests', () => {
 
     it('redirects to login page accessing the page without user is logged in', () => {
         cy.visit('/home');
-        cy.contains('button', 'Logout').click();
+        cy.get('button[mat-icon-button]')
+            .contains('logout', { matchCase: false })
+            .click();
         cy.visit('/user');
         cy.url().should('contain', '/login');
     });
