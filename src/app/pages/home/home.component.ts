@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
     bookCount = 0;
     searchInput = '';
     warningMessage = '';
+    shouldAnimate = true;
 
     constructor(
         private bookService: BookService,
@@ -50,6 +51,14 @@ export class HomeComponent implements OnInit {
                 this.searchInput = isbn;
             }
         });
+
+        const hasVisited = localStorage.getItem('hasVisited');
+        if (!hasVisited) {
+            localStorage.setItem('hasVisited', 'true');
+            this.shouldAnimate = true;
+        } else {
+            this.shouldAnimate = false;
+        }
     }
 
     onKeywordClick(keyword: string) {

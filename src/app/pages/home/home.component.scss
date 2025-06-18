@@ -197,6 +197,24 @@
   }
 }
 
+/* ------------------------ Text Utilities ------------------------ */
+.highlight {
+  color: #00acc1;
+  font-weight: bold;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #007c91;
+    text-shadow: 0 0 5px rgba(0, 172, 193, 0.5);
+  }
+}
+
+.warning {
+  color: red;
+  animation: pulse 0.6s ease-in-out;
+  font-weight: 500;
+}
+
 /* ------------------------ Responsive ------------------------ */
 @media (max-width: 600px) {
   .welcome-header,
@@ -281,12 +299,6 @@
   mat-card-title {
     font-size: 17px;
   }
-}
-
-.warning {
-  color: red;
-  animation: pulse 0.6s ease-in-out;
-  font-weight: 500;
 }
 
 /* ------------------------ Keyframes ------------------------ */
